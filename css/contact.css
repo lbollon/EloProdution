@@ -1,0 +1,43 @@
+.contact-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.map-section, .contact-details {
+    flex: 1 1 300px;
+}
+
+.map-placeholder img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    opacity: 0.8;
+}
+
+.contact-details address {
+    font-style: normal;
+    margin-bottom: 2rem;
+    font-size: 1.2rem;
+}
+
+.contact-details a {
+    color: #e50914;
+    text-decoration: none;
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.social-links img {
+    width: 40px;
+    height: 40px;
+    transition: transform 0.2s;
+}
+
+.social-links img:hover {
+    transform: scale(1.1);
+}
