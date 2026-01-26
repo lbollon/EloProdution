@@ -1,97 +1,78 @@
 <?php 
 session_start(); 
 
-// Initialisation du panier si inexistant
-if (!isset($_SESSION['cart'])) {
-    $_SESSION['cart'] = [];
-}
-
-// Ajout au panier (Traitement Formulaire)
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
-    $product = [
-        'name' => htmlspecialchars($_POST['product_name']),
-        'price' => floatval($_POST['product_price']),
-        'img' => htmlspecialchars($_POST['product_img']),
-        'id' => uniqid() // ID unique temporaire pour la suppression
-    ];
-    $_SESSION['cart'][] = $product;
-}
-
-// Suppression du panier
-if (isset($_GET['remove'])) {
-    $remove_id = $_GET['remove'];
-    foreach ($_SESSION['cart'] as $key => $item) {
-        if ($item['id'] == $remove_id) {
-            unset($_SESSION['cart'][$key]);
-            break;
-        }
-    }
-    // Réindexé le tableau
-    $_SESSION['cart'] = array_values($_SESSION['cart']);
-}
-
-// Calcul du total
-$total = 0;
-foreach ($_SESSION['cart'] as $item) {
-    $total += $item['price'];
+// Vider le panier
+if(isset($_GET['action']) && $_GET['action'] == 'clear') {
+    unset($_SESSION['cart']);
+    header("Location: cart.php");
+    exit();
 }
 ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mon Panier - Elo Production</title>
     <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/cart.css">
+    <style>
+        .cart-table { width: 100%; border-collapse: collapse; margin-bottom: 30px; }
+        .cart-table th { text-align: left; padding: 15px; border-bottom: 2px solid #333; color: #db2777; }
+        .cart-table td { padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .total-box { text-align: right; font-size: 1.5rem; font-weight: bold; margin-top: 20px; }
+        .empty-cart { text-align: center; padding: 50px; color: #a1a1aa; }
+    </style>
 </head>
 <body>
 
-    <header>
-        <div class="logo"><a href="index.php"><img src="img/logo.png" alt="Logo"></a></div>
-        <div class="site-title"><h1>ELO PRODUCTION</h1></div>
-        <div class="cart-link"><a href="cart.php">Panier (<?php echo count($_SESSION['cart']); ?>)</a></div>
-    </header>
-
-    <nav>
-        <ul>
-            <li><a href="index.php">Accueil</a></li>
-            <li><a href="catalog.php">Prestations</a></li>
-            <li><a href="contact.php">Contact</a></li>
-        </ul>
-    </nav>
+    <?php include 'header.php'; ?>
 
     <main>
-        <h2>Votre Panier</h2>
+        <div class="content-bar fade-in-up">
+            <h2>Votre Panier</h2>
+        </div>
 
-        <?php if (empty($_SESSION['cart'])): ?>
-            <p class="empty-msg">Votre panier est vide. <a href="catalog.php">Retourner aux prestations</a>.</p>
-        <?php else: ?>
-            <div class="cart-list">
-                <?php foreach ($_SESSION['cart'] as $item): ?>
-                    <div class="cart-item">
-                        <img src="<?php echo $item['img']; ?>" alt="<?php echo $item['name']; ?>">
-                        <div class="item-details">
-                            <h3><?php echo $item['name']; ?></h3>
-                            <p class="item-price"><?php echo number_format($item['price'], 2, ',', ' '); ?> €</p>
-                        </div>
-                        <a href="cart.php?remove=<?php echo $item['id']; ?>" class="btn-remove" aria-label="Supprimer <?php echo $item['name']; ?>">X</a>
-                    </div>
-                <?php endforeach; ?>
-            </div>
+        <div class="intro-box fade-in-up" style="border-top: none;">
+            <?php if(empty($_SESSION['cart'])): ?>
+                <div class="empty-cart">
+                    <p>Votre panier est vide pour le moment.</p>
+                    <a href="catalog.php" class="btn" style="margin-top: 20px;">Voir les offres</a>
+                </div>
+            <?php else: ?>
+                <table class="cart-table">
+                    <thead>
+                        <tr>
+                            <th>Service</th>
+                            <th>Prix</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php 
+                        $total = 0;
+                        foreach($_SESSION['cart'] as $item): 
+                            $total += $item['price'];
+                        ?>
+                        <tr>
+                            <td><?php echo htmlspecialchars($item['name']); ?></td>
+                            <td><?php echo htmlspecialchars($item['price']); ?> €</td>
+                        </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
 
-            <div class="cart-summary">
-                <h3>Total : <?php echo number_format($total, 2, ',', ' '); ?> €</h3>
-                <button class="btn btn-checkout">Payer la commande</button>
-            </div>
-        <?php endif; ?>
+                <div class="total-box">
+                    Total : <span style="color: #fff;"><?php echo $total; ?> €</span>
+                </div>
+
+                <div style="margin-top: 30px; display: flex; justify-content: space-between; align-items: center;">
+                    <a href="cart.php?action=clear" style="color: #a1a1aa; text-decoration: underline;">Vider le panier</a>
+                    <a href="contact.php" class="btn">Valider le devis</a>
+                </div>
+            <?php endif; ?>
+        </div>
     </main>
 
-    <footer>
-        <div class="copyright"><p>&copy; 2026 Elo Production.</p></div>
-        <div class="footer-nav">
-            <a href="contact.php">Contact</a>
-            <a href="legal.php">Mentions Légales</a>
-        </div>
-    </footer>
+    <?php include 'footer.php'; ?>
+    <script src="js/main.js"></script>
 </body>
 </html>

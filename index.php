@@ -4,45 +4,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elo Production - Vidéaste & Monteur Freelance</title>
+    <title>Elo Production - Vidéaste & Monteur</title>
     <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/index.css">
 </head>
 <body>
 
-    <header role="banner">
-        <div class="logo">
-            <a href="index.php" aria-label="Retour à l'accueil">
-                <img src="img/logo.png" alt="Logo Elo Production">
-            </a>
-        </div>
-        <div class="site-title">
-            <h1>ELO PRODUCTION</h1>
-        </div>
-        <div class="cart-link">
-            <a href="cart.php" aria-label="Voir le panier">
-                Panier (<?php echo isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0; ?>)
-            </a>
-        </div>
-    </header>
-
-    <nav role="navigation" aria-label="Menu principal">
-        <ul>
-            <li><a href="index.php" aria-current="page">Accueil</a></li>
-            <li><a href="catalog.php">Prestations</a></li>
-            <li><a href="contact.php">Contact</a></li>
-        </ul>
-    </nav>
+    <?php include 'header.php'; ?>
 
     <main id="main-content">
-        <section class="hero">
-            <h2>Donnez une dimension cinéma à votre communication</h2>
-            <p>Montage vidéo • Captation • Stratégie Social Media</p>
-            <a href="catalog.php" class="btn">Voir mes offres</a>
-        </section>
+        
+        <div class="top-split-section fade-in-up">
+            
+            <section class="intro-box">
+                <div class="content-bar">
+                    <h2>Présentation</h2>
+                </div>
+                <p class="big-intro">Basé à Chambéry, je transforme vos rushes en or. Pas de bla-bla, que du résultat.</p>
+                <p>Spécialisé dans le montage dynamique et la captation S-Log3 pour les réseaux sociaux.</p>
+                <a href="catalog.php" class="btn">Voir mes offres</a>
+            </section>
 
-        <section class="showreel" aria-labelledby="showreel-title">
-            <h2 id="showreel-title">Showreel 2026</h2>
+            <section class="narrative-box">
+                <div class="narrative-step">
+                    <h3>⚠️ Le Problème</h3>
+                    <p>Vos vidéos manquent de rythme et ne convertissent pas ?</p>
+                </div>
+                <div class="narrative-step">
+                    <h3>💡 Le Déclic</h3>
+                    <p>Ce n'est pas le matériel, c'est la structure "No Excuses".</p>
+                </div>
+                <div class="narrative-step">
+                    <h3>🚀 Le Résultat</h3>
+                    <p>Des contenus captivants qui engagent votre audience.</p>
+                </div>
+            </section>
+        </div>
+
+        <section id="showreel-section" class="showreel-section fade-in-up">
+            <div class="content-bar" style="margin: 0 auto 30px auto; display: inline-block;">
+                <h2>Showreel 2026</h2>
+            </div>
             <div class="video-container">
                 <video controls poster="img/showreel-poster.jpg">
                     <source src="video/showreel.mp4" type="video/mp4">
@@ -51,63 +52,37 @@
             </div>
         </section>
 
-        <section class="narrative">
-            <article>
-                <h3>Le Problème</h3>
-                <p>Vous passez des heures à filmer mais vos vidéos manquent de rythme et ne convertissent pas.</p>
-            </article>
-            <div class="arrow" aria-hidden="true">⬇</div>
-            <article>
-                <h3>Le Déclic</h3>
-                <p>Ce n'est pas le matériel qui compte, c'est l'histoire et la structure "No Excuses".</p>
-            </article>
-            <div class="arrow" aria-hidden="true">⬇</div>
-            <article>
-                <h3>Le Résultat</h3>
-                <p>Des contenus captivants, montés sur Sony A6700 en S-Log3, qui engagent votre audience.</p>
-            </article>
-        </section>
+        <section class="gear-section fade-in-up">
+            <div class="content-bar">
+                <h2>Mon Setup & Logiciels</h2>
+            </div>
+            
+            <div class="gear-grid">
+                <article class="gear-card">
+                    <h3>📸 Caméra</h3>
+                    <p>Sony A6700</p>
+                    <p>Obj. Sigma 18-50mm</p>
+                </article>
 
-        <section class="social-proof">
-            <h2>Études de Cas</h2>
-            <div class="case-study">
-                <div class="before">
-                    <h4>Avant</h4>
-                    <img src="img/case1-before.jpg" alt="Image terne avant étalonnage">
-                </div>
-                <div class="after">
-                    <h4>Après</h4>
-                    <img src="img/case1-after.jpg" alt="Image cinéma après étalonnage">
-                </div>
-                <p>Client : Restaurant Le Savoie - +40% de réservations via Instagram.</p>
+                <article class="gear-card">
+                    <h3>🎤 Audio & Stab</h3>
+                    <p>DJI Mic 2</p>
+                    <p>Stabilisateur Ronin</p>
+                </article>
+
+                <article class="gear-card">
+                    <h3>💻 Post-Prod</h3>
+                    <p>Premiere Pro</p>
+                    <p>After Effects</p>
+                </article>
             </div>
         </section>
 
-        <section class="about-snippet">
-            <h2>Mon Approche</h2>
-            <p>Basé à Chambéry, je transforme vos rushes en or. Pas de bla-bla, que du résultat.</p>
-            <h3>Mon Setup</h3>
-            <ul class="gear-list">
-                <li>Sony A6700</li>
-                <li>Stabilisateur Ronin</li>
-                <li>Micro HF DJI</li>
-            </ul>
-        </section>
-
-        <div class="cta-calendly">
-            <a href="https://calendly.com/eloprod" target="_blank" class="btn-secondary">Réserver un appel découverte</a>
-        </div>
     </main>
 
-    <footer role="contentinfo">
-        <div class="copyright">
-            <p>&copy; 2026 Elo Production. Tous droits réservés.</p>
-        </div>
-        <div class="footer-nav">
-            <a href="contact.php">Contact</a>
-            <a href="legal.php">Mentions Légales</a>
-        </div>
-    </footer>
+    <?php include 'footer.php'; ?>
+    
+    <script src="js/main.js"></script>
 
 </body>
 </html>

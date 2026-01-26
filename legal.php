@@ -3,61 +3,44 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mentions Légales - Elo Production</title>
     <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/legal.css">
 </head>
 <body>
 
-    <header>
-        <div class="logo"><a href="index.php"><img src="img/logo.png" alt="Logo"></a></div>
-        <div class="site-title"><h1>ELO PRODUCTION</h1></div>
-        <div class="cart-link"><a href="cart.php">Panier (<?php echo isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0; ?>)</a></div>
-    </header>
+    <?php include 'header.php'; ?>
 
-    <nav>
-        <ul>
-            <li><a href="index.php">Accueil</a></li>
-            <li><a href="catalog.php">Prestations</a></li>
-            <li><a href="contact.php">Contact</a></li>
-        </ul>
-    </nav>
+    <main>
+        <div class="content-bar fade-in-up">
+            <h2>Mentions Légales</h2>
+        </div>
 
-    <main class="legal-content">
-        <h1>Mentions Légales</h1>
+        <div class="intro-box fade-in-up">
+            <h3 style="color: #db2777; margin-bottom: 15px;">1. Éditeur du site</h3>
+            <p style="margin-bottom: 20px;">
+                <strong>ELO PRODUCTION</strong><br>
+                Entrepreneur Individuel<br>
+                Siège social : [Ton Adresse], 73000 Chambéry<br>
+                Email : contact@eloprod.com<br>
+                SIRET : [Ton Numéro SIRET]
+            </p>
 
-        <section>
-            <h2>1. Éditeur du site</h2>
-            <p>Le site Elo Production est édité par [Nom Prénom], micro-entrepreneur.</p>
-            <p>Siège social : Chambéry, 73000, France.</p>
-            <p>SIRET : 000 000 000 00000</p>
-        </section>
+            <h3 style="color: #db2777; margin-bottom: 15px;">2. Hébergement</h3>
+            <p style="margin-bottom: 20px;">
+                Le site est hébergé par :<br>
+                [Nom de l'hébergeur, ex: OVH, Hostinger]<br>
+                Adresse de l'hébergeur
+            </p>
 
-        <section>
-            <h2>2. Hébergement</h2>
-            <p>Le site est hébergé par [Nom de l'hébergeur].</p>
-            <p>Adresse : [Adresse hébergeur].</p>
-        </section>
-
-        <section>
-            <h2>3. Propriété intellectuelle</h2>
-            <p>L'ensemble de ce site relève de la législation française et internationale sur le droit d'auteur et la propriété intellectuelle. Tous les droits de reproduction sont réservés.</p>
-            <p>Les vidéos, photos et textes sont la propriété exclusive d'Elo Production.</p>
-        </section>
-
-        <section>
-            <h2>4. Données personnelles</h2>
-            <p>Les informations recueillies via le formulaire de contact sont destinées uniquement à la gestion des demandes clients.</p>
-            <p>Conformément à la loi RGPD, vous disposez d'un droit d'accès et de rectification.</p>
-        </section>
+            <h3 style="color: #db2777; margin-bottom: 15px;">3. Propriété Intellectuelle</h3>
+            <p>
+                L’ensemble de ce site relève de la législation française et internationale sur le droit d’auteur et la propriété intellectuelle. 
+                Tous les droits de reproduction sont réservés, y compris pour les documents téléchargeables et les représentations iconographiques et photographiques.
+            </p>
+        </div>
     </main>
 
-    <footer>
-        <div class="copyright"><p>&copy; 2026 Elo Production.</p></div>
-        <div class="footer-nav">
-            <a href="contact.php">Contact</a>
-            <a href="legal.php">Mentions Légales</a>
-        </div>
-    </footer>
+    <?php include 'footer.php'; ?>
 </body>
 </html>

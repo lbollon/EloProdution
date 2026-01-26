@@ -3,63 +3,62 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact - Elo Production</title>
     <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/contact.css">
+    <style>
+        .contact-container { display: flex; gap: 50px; flex-wrap: wrap;}
+        .contact-info { flex: 1; min-width: 300px; }
+        .contact-form { flex: 2; min-width: 300px; background: var(--bg-card); padding: 40px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.05); }
+        
+        /* Inputs Premium */
+        input, textarea {
+            width: 100%; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1);
+            color: #fff; padding: 15px; border-radius: 8px; margin-bottom: 20px;
+            font-family: inherit; transition: 0.3s;
+        }
+        input:focus, textarea:focus { border-color: #db2777; outline: none; background: rgba(0,0,0,0.5); }
+        label { display: block; margin-bottom: 8px; font-weight: bold; color: #db2777; }
+    </style>
 </head>
 <body>
 
-    <header role="banner">
-        <div class="logo"><a href="index.php"><img src="img/logo.png" alt="Logo"></a></div>
-        <div class="site-title"><h1>ELO PRODUCTION</h1></div>
-        <div class="cart-link"><a href="cart.php">Panier (<?php echo isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0; ?>)</a></div>
-    </header>
+    <?php include 'header.php'; ?>
 
-    <nav>
-        <ul>
-            <li><a href="index.php">Accueil</a></li>
-            <li><a href="catalog.php">Prestations</a></li>
-            <li><a href="contact.php" aria-current="page">Contact</a></li>
-        </ul>
-    </nav>
-
-    <main class="contact-container">
-        <div class="map-section">
-            <h2>Localisation</h2>
-            <div class="map-placeholder" role="img" aria-label="Carte montrant Chambéry, Savoie">
-                <img src="img/map-chambery.jpg" alt="Plan de Chambéry">
-                <p>Basé à Chambéry (73) - Déplacement en Savoie & Lyon</p>
-            </div>
+    <main>
+        <div class="content-bar fade-in-up">
+            <h2>Discutons de votre projet</h2>
         </div>
 
-        <div class="contact-details">
-            <h2>Me Contacter</h2>
-            <address>
-                <p><strong>Email :</strong> <a href="mailto:contact@eloprod.com">contact@eloprod.com</a></p>
-                <p><strong>Téléphone :</strong> <a href="tel:+33600000000">06 00 00 00 00</a></p>
-            </address>
-
-            <div class="social-links">
-                <h3>Réseaux Sociaux</h3>
-                <a href="https://instagram.com" target="_blank">
-                    <img src="img/icon-insta.png" alt="Instagram">
-                </a>
-                <a href="https://tiktok.com" target="_blank">
-                    <img src="img/icon-tiktok.png" alt="TikTok">
-                </a>
-                <a href="https://twitter.com" target="_blank">
-                    <img src="img/icon-x.png" alt="X (Twitter)">
-                </a>
+        <div class="contact-container fade-in-up">
+            
+            <div class="contact-info">
+                <h3 style="font-size: 1.5rem; margin-bottom: 20px;">Informations</h3>
+                <p style="color: #a1a1aa; margin-bottom: 30px;">
+                    Vous avez une idée ? Un projet ? Remplissez le formulaire et je vous réponds sous 24h.
+                </p>
+                <p><strong>Email :</strong> contact@eloprod.com</p>
+                <p><strong>Lieu :</strong> Chambéry & alentours (73)</p>
+                <p><strong>Instagram :</strong> @eloprod</p>
             </div>
+
+            <form class="contact-form" action="" method="POST">
+                <label for="name">Nom / Entreprise</label>
+                <input type="text" id="name" name="name" required placeholder="Votre nom">
+
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required placeholder="exemple@mail.com">
+
+                <label for="message">Message</label>
+                <textarea id="message" name="message" rows="6" required placeholder="Parlez-moi de votre projet..."></textarea>
+
+                <button type="submit" class="btn">Envoyer le message</button>
+            </form>
+
         </div>
     </main>
 
-    <footer>
-        <div class="copyright"><p>&copy; 2026 Elo Production.</p></div>
-        <div class="footer-nav">
-            <a href="contact.php">Contact</a>
-            <a href="legal.php">Mentions Légales</a>
-        </div>
-    </footer>
+    <?php include 'footer.php'; ?>
+    <script src="js/main.js"></script>
 </body>
 </html>
