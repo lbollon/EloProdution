@@ -1,337 +1,471 @@
 /* ==========================================================================
-   VARIABLES & COULEURS (Palette enrichie)
+   ELO PRODUCTION - SCSS MASTER (Architecture SASS)
    ========================================================================== */
-// On remplace le noir pur par des tons riches et profonds pour moins de dureté
-$bg-gradient-start: #141414; // Gris anthracite très sombre
-$bg-gradient-end: #0a0a0a;   // Presque noir
-$card-bg: #1e1e24;           // Fond des boites, légèrement bleuté/gris pour contraster
-$text-light: #f0f0f0;        // Blanc cassé, moins agressif pour les yeux
-$text-muted: #aaaaaa;        // Pour les sous-titres
 
-$accent-pink: #db2777;       // Ta couleur signature inchangée
-$accent-glow: rgba($accent-pink, 0.15); // Pour des effets lumineux subtils
+/* 1. CONFIGURATION & VARIABLES
+   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap');
 
-$font-main: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-$font-title: 'Impact', sans-serif;
-$font-mono: 'Courier New', monospace;
+// Couleurs
+$bg-dark:       #050505;
+$bg-card:       rgba(30, 30, 40, 0.6); // Effet verre sombre
+$accent:        #db2777; // Ton Rose Signature
+$accent-glow:   rgba(219, 39, 119, 0.4);
+$text-main:     #ffffff;
+$text-muted:    #a1a1aa;
 
-$box-shadow-subtle: 0 10px 30px -15px rgba(0, 0, 0, 0.5); /* Ombre douce */
-$border-radius: 12px; /* Coins arrondis modernes */
+// Typographie
+$font-heading:  'Montserrat', sans-serif;
+$font-body:     'Helvetica Neue', Helvetica, Arial, sans-serif;
 
-/* ==========================================================================
-   RESET & BASE
+// UI
+$radius:        16px;
+
+/* 2. MIXINS & PLACEHOLDERS
+   ========================================================================== */
+
+// L'effet "Verre dépoli" (Glassmorphism)
+%glass-panel {
+    background: $bg-card;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: $radius;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, border-color 0.3s;
+
+    &:hover {
+        transform: translateY(-5px);
+        border-color: rgba(219, 39, 119, 0.3);
+    }
+}
+
+// Animation d'apparition
+.fade-in-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+
+    &.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 3. RESET, BASE & BACKGROUND
    ========================================================================== */
 * { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
 
 body {
-    // Dégradé subtil au lieu d'un noir plat
-    background: linear-gradient(to bottom, $bg-gradient-start, $bg-gradient-end);
-    color: $text-light;
-    font-family: $font-main;
+    background-color: $bg-dark;
+    
+    // Dégradé d'ambiance
+    background-image: 
+        radial-gradient(circle at 15% 50%, rgba(30, 30, 60, 0.45) 0%, transparent 30%),
+        radial-gradient(circle at 85% 60%, rgba(219, 39, 119, 0.18) 0%, transparent 35%);
+    
+    background-attachment: fixed; 
+    background-size: cover; 
+
+    color: $text-main;
+    font-family: $font-body;
     line-height: 1.6;
     overflow-x: hidden;
     min-height: 100vh;
 }
 
-/* Accessibilité Clavier */
-a:focus, button:focus, input:focus { outline: 3px solid $accent-pink; outline-offset: 2px; }
-
-/* ==========================================================================
-   COMPOSANTS RÉUTILISABLES (Titres & Boutons)
-   ========================================================================== */
-/* Signature Elo Production : Barre latérale animée */
-.content-bar {
-    border-left: 4px solid $accent-pink; // Barre un peu plus fine
-    padding-left: 15px;
-    opacity: 0;
-    transform: translateX(-30px);
-    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94); // Transition plus fluide
-
-    h2, h3, p {
-        margin: 0;
-        color: $text-light;
-        font-family: $font-title;
-        font-size: 2.2rem;
-        line-height: 1.1;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-    }
-}
-// L'état qui déclenche l'apparition (à laisser pour que ça s'affiche direct)
-.reveal .content-bar { opacity: 1; transform: translateX(0); }
-
-.btn {
-    display: inline-block;
-    background: $accent-pink;
-    color: white;
-    padding: 14px 30px;
-    text-decoration: none;
-    font-weight: bold;
-    border-radius: 50px; // Boutons très arrondis, plus modernes
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba($accent-pink, 0.3); // Petit halo lumineux
-
-    &:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 8px 25px rgba($accent-pink, 0.5);
-        background: lighten($accent-pink, 5%);
-    }
+// Fond animé (Particules)
+#particles-js {
+    position: fixed;
+    width: 100%; height: 100%;
+    top: 0; left: 0;
+    z-index: -1; 
+    background: transparent;
+    pointer-events: none;
 }
 
-/* ==========================================================================
-   HEADER & NAVIGATION (Centré et épuré)
+canvas.particles-js-canvas-el {
+    pointer-events: auto; 
+    position: absolute;
+    top: 0; left: 0;
+    z-index: -1;
+}
+
+/* Accessibilité */
+a:focus, button:focus, input:focus { 
+    outline: 2px solid $accent; 
+    outline-offset: 2px; 
+}
+
+/* 4. HEADER & NAVIGATION (Redesign "Floating Neon")
    ========================================================================== */
 header {
+    position: fixed;
+    top: 20px; 
+    left: 50%;
+    transform: translateX(-50%); 
+    width: 90%; 
+    max-width: 1200px;
+    height: 70px;
+    z-index: 1000;
+    
     display: flex;
     justify-content: space-between;
     align-items: center;
-    // On centre le contenu du header dans la page
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 2rem 30px;
-    // Fond transparent pour laisser voir le dégradé du body
-    background: transparent;
-
-    .logo img { height: 50px; }
+    padding: 0 30px;
     
-    .site-title h1 {
-        font-family: $font-title;
-        font-size: 3.5rem; /* Titre très gros comme demandé */
-        letter-spacing: 2px;
-        text-align: center;
-        // Petit effet de dégradé sur le texte du titre (optionnel, très design)
-        background: linear-gradient(to right, #fff, #ccc);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
+    background: rgba(10, 10, 15, 0.6); 
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 50px; 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     
-    .cart-link a { color: $text-light; text-decoration: none; font-weight: 600; font-size: 0.9rem;}
-}
-
-nav {
-    // Barre de nav centrée
-    max-width: 1280px;
-    margin: 0 auto 4rem auto;
-    padding: 1rem 30px;
-    
-    ul {
-        display: flex;
-        justify-content: center; // Liens centrés
-        list-style: none;
-        gap: 40px;
-        padding: 15px 0;
-        border-top: 1px solid rgba(255,255,255,0.05);
-        border-bottom: 1px solid rgba(255,255,255,0.05);
-
-        a {
-            color: $text-muted;
-            text-decoration: none;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 600;
-            transition: color 0.3s;
-            
-            &:hover, &[aria-current="page"] {
-                color: $accent-pink;
-            }
-        }
-    }
-}
-
-/* ==========================================================================
-   MAIN CONTAINER (Centrage global)
-   ========================================================================== */
-main {
-    // Le conteneur principal est centré sur la page
-    max-width: 1200px;
-    margin: 0 auto 80px auto; // Plus d'espace en bas
-    padding: 0 30px; // Marges sur les côtés pour petits écrans
-}
-
-
-/* ==========================================================================
-   SECTIONS SPÉCIFIQUES (Design des blocs)
-   ========================================================================== */
-
-/* 1. SECTION DU HAUT (2 Colonnes) */
-.top-split-section {
-    display: flex;
-    gap: 50px; // Plus d'espace entre les colonnes
-    margin-bottom: 80px;
-    align-items: stretch;
-
-    @media (max-width: 900px) { flex-direction: column; gap: 30px; }
-}
-
-/* Styles communs pour les "cartes" (intro, narrative, matos) */
-%card-style {
-    background: $card-bg; // Fond plus clair que le body
-    padding: 40px;
-    border-radius: $border-radius;
-    box-shadow: $box-shadow-subtle; // Ombre pour la profondeur
-    border: 1px solid rgba(255, 255, 255, 0.03); // Bordure très subtile
-    transition: transform 0.3s ease;
-}
-
-/* Bloc Gauche : Présentation */
-.intro-box {
-    @extend %card-style;
-    flex: 5; // Prend un peu plus de place
-    border-top: 3px solid rgba($accent-pink, 0.5); // Petite touche couleur
-
-    .big-intro {
-        font-size: 1.4rem;
-        font-weight: 600;
-        line-height: 1.4;
-        margin-bottom: 1.5rem;
-        color: #fff;
-    }
-    p { margin-bottom: 2rem; color: $text-muted; }
-}
-
-/* Bloc Droite : Narrative */
-.narrative-box {
-    @extend %card-style;
-    flex: 4;
-    // Fond légèrement teinté de rose pour différencier
-    background: linear-gradient(to bottom right, $card-bg, darken($card-bg, 3%));
-    position: relative;
-    overflow: hidden;
-
-    // Petit effet de lumière dans le coin (très design)
-    &::after {
-        content: '';
-        position: absolute;
-        top: -50px; right: -50px;
-        width: 100px; height: 100px;
-        background: $accent-pink;
-        filter: blur(80px);
-        opacity: 0.2;
-    }
-
-    .narrative-step {
-        margin-bottom: 25px;
-        &:last-child { margin-bottom: 0; }
-
-        h3 {
-            color: lighten($accent-pink, 10%);
-            font-size: 1.2rem;
-            margin-bottom: 8px;
-            font-family: $font-title;
-            letter-spacing: 0.5px;
-        }
-        p {
-            font-size: 0.95rem;
-            color: darken($text-light, 15%);
-        }
-    }
-}
-
-/* 2. SECTION SHOWREEL */
-.showreel-section {
-    margin-bottom: 100px;
-    text-align: center;
-
-    .content-bar { margin-bottom: 30px; display: inline-block; text-align: left; }
-
-    .video-container {
-        position: relative;
-        border-radius: $border-radius;
-        overflow: hidden;
-        // Grosse ombre portée pour faire ressortir la vidéo
-        box-shadow: 0 20px 50px rgba(0,0,0,0.6);
-        border: 1px solid rgba(255,255,255,0.05);
-
-        video {
-            width: 100%;
-            display: block;
-        }
-    }
-}
-
-/* 3. SECTION MATÉRIEL (3 Cartes) */
-.gear-section {
-    margin-bottom: 80px;
-    // Centre le titre de la section
-    display: flex; flex-direction: column; align-items: center;
-    .content-bar { align-self: flex-start; margin-bottom: 40px; }
-}
-
-.gear-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
-    width: 100%;
-
-    @media (max-width: 768px) { grid-template-columns: 1fr; }
-}
-
-.gear-card {
-    @extend %card-style;
-    padding: 30px 20px;
-    text-align: center;
-    border-top: none; // On enlève la bordure du haut générique...
-    border-bottom: 4px solid $accent-pink; // ...pour la mettre en bas
+    transition: all 0.3s ease;
 
     &:hover {
-        transform: translateY(-10px); // Effet de survol
-        box-shadow: 0 15px 40px -10px rgba($accent-pink, 0.3);
-    }
-
-    h3 {
-        margin-bottom: 20px;
-        font-size: 1.3rem;
-        color: #fff;
-        font-family: $font-title;
-        letter-spacing: 1px;
-    }
-
-    p {
-        color: $text-muted;
-        margin-bottom: 8px;
-        font-family: $font-mono;
-        font-size: 0.85rem;
-        background: rgba(0,0,0,0.2); // Petit fond sous le texte technique
-        display: inline-block;
-        padding: 4px 8px;
-        border-radius: 4px;
+        border-color: rgba(255, 255, 255, 0.2);
+        box-shadow: 0 10px 40px rgba(0,0,0,0.6);
     }
 }
 
-/* ==========================================================================
-   FOOTER
-   ========================================================================== */
-footer {
-    margin-top: auto; // Pousse le footer en bas
-    padding: 50px 30px;
-    // Fond différent pour le footer
-    background: darken($bg-gradient-start, 2%);
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
+// LOGO (Correction du centrage vertical)
+.header-left {
+    display: flex;       // Permet de centrer verticalement le contenu
+    align-items: center; // Centre l'axe Y
+    height: 100%;        // Prend toute la hauteur disponible
+}
+
+.header-left .logo-link {
+    display: flex;       // SUPPRIME l'espace fantôme sous l'image
+    align-items: center; // Centre l'image dans le lien
+}
+
+.header-left .logo-link img {
+    height: 40px; 
+    width: 40px;       
+    object-fit: cover; 
+    border-radius: 50%; 
+    display: block;      // Sécurité pour éviter le comportement "texte"
     
-    // Contenu centré
-    .footer-content {
-        max-width: 1280px;
-        margin: 0 auto;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        font-size: 0.85rem;
-        color: darken($text-muted, 20%);
+    transition: transform 0.3s ease;
+
+    &:hover {
+        transform: scale(1.1);
+        filter: drop-shadow(0 0 8px $accent);
     }
+}
+
+// MENU CENTRAL
+.header-center {
+    ul {
+        display: flex;
+        gap: 5px; 
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        background: rgba(255,255,255,0.03);
+        padding: 5px;
+        border-radius: 30px;
+    }
+
+    a {
+        position: relative;
+        color: $text-muted;
+        text-decoration: none;
+        font-family: $font-heading;
+        font-weight: 600;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        padding: 8px 20px;
+        border-radius: 20px;
+        transition: all 0.3s ease;
+
+        &:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.1);
+            text-shadow: 0 0 10px rgba(255,255,255,0.5);
+        }
+
+        &[aria-current="page"], &.active {
+            color: #fff;
+            background: $accent; 
+            box-shadow: 0 0 15px $accent-glow;
+        }
+    }
+}
+
+// BOUTON PANIER
+.cart-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    padding: 8px 15px;
+    border-radius: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s;
+
+    span {
+        font-family: $font-heading;
+        font-weight: 700;
+        font-size: 0.75rem;
+        color: #fff;
+        text-transform: uppercase;
+    }
+
+    .cart-count {
+        background: $accent;
+        color: #fff;
+        padding: 2px 6px;
+        border-radius: 50%;
+        font-size: 0.7rem;
+        box-shadow: 0 0 10px $accent-glow;
+    }
+
+    &:hover {
+        border-color: $accent;
+        background: rgba(219, 39, 119, 0.1);
+        transform: translateY(-2px);
+    }
+}
+
+/* 5. LAYOUT & UI COMPONENTS
+   ========================================================================== */
+main {
+    padding-top: 140px; 
+    max-width: 1200px;
+    margin: 0 auto 80px;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+// HERO TITLE
+.hero-title {
+    text-align: center;
+    margin-bottom: 80px;
+    
+    h1 {
+        font-family: $font-heading;
+        font-size: 4.5rem;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: 5px;
+        line-height: 1.1;
+        margin-bottom: 15px;
+        
+        background: linear-gradient(to bottom, #ffffff 0%, #a1a1aa 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
+    }
+
+    .subtitle {
+        display: inline-block;
+        color: $accent;
+        font-size: 1rem;
+        font-family: $font-heading;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        
+        border: 1px solid rgba(219, 39, 119, 0.3);
+        padding: 8px 25px;
+        border-radius: 50px;
+        background: rgba(219, 39, 119, 0.1);
+        box-shadow: 0 0 20px rgba(219, 39, 119, 0.15);
+    }
+}
+
+// CONTENT BAR
+.content-bar {
+    border-left: 4px solid $accent;
+    padding-left: 20px;
+    margin-bottom: 2rem;
+
+    h2 {
+        font-family: $font-heading; font-weight: 900; font-size: 2.2rem;
+        text-transform: uppercase; line-height: 1; color: #fff; margin: 0;
+    }
+    p { color: $text-muted; font-size: 0.9rem; margin-top: 5px; }
+}
+
+// BOUTON (MODIFIÉ : Centrage parfait)
+.btn {
+    display: inline-flex;     /* Flexbox pour le centrage */
+    align-items: center;      /* Vertical */
+    justify-content: center;  /* Horizontal */
+    line-height: 1;           /* Évite le décalage */
+    
+    background: $accent;
+    color: #fff;
+    padding: 14px 30px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-family: $font-heading;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 0 20px $accent-glow;
+    transition: all 0.3s;
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 0 30px $accent-glow;
+        background: lighten($accent, 5%);
+    }
+}
+
+// Composant : Carte Verre
+.card-glass {
+    @extend %glass-panel;
+    padding: 30px;
+}
+
+/* 6. PAGE ACCUEIL (Sections)
+   ========================================================================== */
+.top-split-section {
+    display: flex; gap: 40px; margin-bottom: 100px;
+}
+
+.intro-box {
+    @extend %glass-panel;
+    flex: 1.2; 
+    padding: 40px;
+    
+    // Centrage contenu vertical
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: flex-start; 
+    
+    .big-intro { 
+        font-size: 1.2rem; 
+        font-weight: 600; 
+        color: #fff; 
+        margin-bottom: 1.5rem; 
+    }
+    
+    p { 
+        color: $text-muted; 
+        margin-bottom: 30px; 
+    }
+}
+
+.narrative-box {
+    @extend %glass-panel;
+    flex: 1; padding: 40px;
+    .narrative-step {
+        margin-bottom: 20px;
+        h3 { color: $accent; font-family: $font-heading; font-weight: 700; margin-bottom: 5px; }
+    }
+}
+
+.showreel-section {
+    margin-bottom: 120px; text-align: center;
+    .video-container {
+        border-radius: $radius; overflow: hidden;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+        border: 1px solid rgba(255,255,255,0.1);
+        video { width: 100%; display: block; }
+    }
+}
+
+.gear-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
+
+.gear-card {
+    background: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01));
+    padding: 30px; border-radius: 16px; text-align: center;
+    border: 1px solid rgba(255,255,255,0.05); transition: 0.3s;
+
+    &:hover { transform: translateY(-5px); background: rgba(255,255,255,0.08); }
+    h3 { font-family: $font-heading; color: #fff; margin-bottom: 10px; }
+    p { color: $text-muted; font-size: 0.85rem; }
+}
+
+/* 7. PAGE PROJETS & CATALOGUE
+   ========================================================================== */
+.video-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 40px; margin-bottom: 80px;
+}
+
+.video-wrapper {
+    position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; 
+    border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); background: #000;
+    iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+}
+
+.photo-gallery {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px;
+}
+
+.photo-item {
+    border-radius: 8px; overflow: hidden; height: 300px;
+    position: relative; cursor: pointer; transition: transform 0.3s;
+    &:hover { transform: scale(1.02); z-index: 2; box-shadow: 0 10px 20px $accent-glow; }
+    img { width: 100%; height: 100%; object-fit: cover; }
+}
+
+.catalog-grid { 
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; 
+}
+
+.product-card {
+    @extend %glass-panel;
+    padding: 30px; display: flex; flex-direction: column; justify-content: space-between;
+    .product-img { width: 100%; height: 200px; object-fit: cover; border-radius: 8px; margin-bottom: 20px; }
+    .price-tag { font-size: 1.4rem; font-weight: 900; color: $accent; margin: 15px 0; display: block; font-family: $font-heading;}
+}
+
+/* 8. FORMS & FOOTER
+   ========================================================================== */
+.contact-container { display: flex; gap: 50px; flex-wrap: wrap; }
+.contact-form { flex: 2; min-width: 300px; @extend %glass-panel; padding: 40px; }
+
+input, textarea {
+    width: 100%; background: rgba(0,0,0,0.3);
+    border: 1px solid rgba(255,255,255,0.1); color: #fff;
+    padding: 15px; border-radius: 8px; margin-bottom: 20px; font-family: inherit; transition: 0.3s;
+    &:focus { border-color: $accent; outline: none; background: rgba(0,0,0,0.5); }
+}
+label { display: block; margin-bottom: 8px; font-weight: 700; color: $accent; font-family: $font-heading; }
+
+.cart-table {
+    width: 100%; border-collapse: collapse; margin-bottom: 30px;
+    th { text-align: left; padding: 15px; border-bottom: 2px solid #333; color: $accent; font-family: $font-heading; }
+    td { padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+}
+
+footer {
+    margin-top: 100px; padding: 3rem 5%;
+    background: rgba(0, 0, 0, 0.6);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex; justify-content: space-between; align-items: center;
 
     .footer-nav a {
-        color: $text-muted;
-        margin-left: 30px;
-        text-decoration: none;
-        transition: color 0.3s;
-        &:hover { color: $accent-pink; }
+        color: #fff; text-decoration: none; font-size: 0.85rem;
+        font-weight: 700; text-transform: uppercase; margin-left: 30px;
+        font-family: $font-heading; opacity: 0.7; transition: 0.3s;
+        &:hover { color: $accent; opacity: 1; }
     }
+    .copyright p { color: $text-muted; font-size: 0.85rem; }
+}
 
-    @media (max-width: 768px) {
-        .footer-content { flex-direction: column; gap: 20px; text-align: center; }
-        .footer-nav a { margin: 0 10px; }
-    }
+/* 9. GLOBAL RESPONSIVE
+   ========================================================================== */
+@media (max-width: 900px) {
+    header { padding: 0 20px; height: 70px; }
+    .header-center { display: none; } 
+    
+    .top-split-section, .contact-container { flex-direction: column; }
+    .gear-grid { grid-template-columns: 1fr; }
+    
+    .hero-title h1 { font-size: 2.5rem; letter-spacing: 2px; }
+    .hero-title .subtitle { font-size: 0.8rem; padding: 6px 15px; }
+    
+    footer { flex-direction: column; gap: 20px; text-align: center; }
+    .footer-nav a { margin: 0 10px; }
 }

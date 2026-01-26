@@ -1,296 +1,575 @@
+@charset "UTF-8";
 /* ==========================================================================
-   ELO PRODUCTION - MASTER STYLESHEET
+   ELO PRODUCTION - SCSS MASTER (Architecture SASS)
    ========================================================================== */
-
-/* 1. IMPORTS & VARIABLES
+/* 1. CONFIGURATION & VARIABLES
    ========================================================================== */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap');
-
-:root {
-    --bg-dark: #050505;
-    --bg-card: rgba(30, 30, 40, 0.6); /* Effet verre sombre */
-    --accent: #db2777; /* Ton Rose Signature */
-    --accent-glow: rgba(219, 39, 119, 0.4);
-    --text-main: #ffffff;
-    --text-muted: #a1a1aa;
-    --font-heading: 'Montserrat', sans-serif;
-    --font-body: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    --radius: 16px;
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap");
+/* 2. MIXINS & PLACEHOLDERS
+   ========================================================================== */
+.contact-form, .product-card, .narrative-box, .intro-box, .card-glass {
+  background: rgba(30, 30, 40, 0.6);
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, border-color 0.3s;
+}
+.contact-form:hover, .product-card:hover, .narrative-box:hover, .intro-box:hover, .card-glass:hover {
+  transform: translateY(-5px);
+  border-color: rgba(219, 39, 119, 0.3);
 }
 
-/* 2. RESET & BASE
-   ========================================================================== */
-* { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-
-body {
-    background-color: var(--bg-dark);
-    /* Fond complexe : Dégradé + Grain subtil */
-    background-image: 
-        radial-gradient(circle at 15% 50%, rgba(30, 30, 60, 0.4) 0%, transparent 25%),
-        radial-gradient(circle at 85% 30%, rgba(219, 39, 119, 0.1) 0%, transparent 25%);
-    color: var(--text-main);
-    font-family: var(--font-body);
-    line-height: 1.6;
-    overflow-x: hidden;
-    min-height: 100vh;
-}
-
-/* 3. ANIMATIONS (Fade In Up)
-   ========================================================================== */
 .fade-in-up {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 .fade-in-up.visible {
-    opacity: 1;
-    transform: translateY(0);
+  opacity: 1;
+  transform: translateY(0);
 }
 
-/* 4. HEADER & NAVIGATION (Sticky)
+/* 3. RESET, BASE & BACKGROUND
+   ========================================================================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #050505;
+  background-image: radial-gradient(circle at 15% 50%, rgba(30, 30, 60, 0.45) 0%, transparent 30%), radial-gradient(circle at 85% 60%, rgba(219, 39, 119, 0.18) 0%, transparent 35%);
+  background-attachment: fixed;
+  background-size: cover;
+  color: #ffffff;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+#particles-js {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  background: transparent;
+  pointer-events: none;
+}
+
+canvas.particles-js-canvas-el {
+  pointer-events: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+/* Accessibilité */
+a:focus, button:focus, input:focus {
+  outline: 2px solid #db2777;
+  outline-offset: 2px;
+}
+
+/* 4. HEADER & NAVIGATION (Redesign "Floating Neon")
    ========================================================================== */
 header {
-    position: fixed;
-    top: 0; left: 0; width: 100%;
-    z-index: 1000;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.8rem 5%;
-    background: rgba(5, 5, 5, 0.85); /* Fond sombre semi-transparent */
-    backdrop-filter: blur(12px); /* Flou derrière le menu */
-    border-bottom: 1px solid rgba(255,255,255,0.05);
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 1200px;
+  height: 70px;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30px;
+  background: rgba(10, 10, 15, 0.6);
+  -webkit-backdrop-filter: blur(12px);
+          backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 50px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease;
+}
+header:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
 }
 
-/* Nouveau style pour le Logo Carré */
-header .logo img { 
-    height: 55px; 
-    border-radius: 8px; /* Coins arrondis */
-    border: 1px solid rgba(255,255,255,0.1); /* Fin contour */
-    transition: transform 0.3s;
-}
-header .logo img:hover { transform: scale(1.05); }
-
-header .site-title h1 {
-    font-family: var(--font-heading);
-    font-weight: 900;
-    font-size: 1.4rem;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    background: linear-gradient(to right, #fff, #a1a1aa);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+.header-left {
+  display: flex;
+  align-items: center;
+  height: 100%;
 }
 
-/* Navigation Centrée */
-nav {
-    margin-top: 100px; /* Compensation du header fixe */
-    margin-bottom: 3rem;
-    text-align: center;
+.header-left .logo-link {
+  display: flex;
+  align-items: center;
 }
 
-nav ul {
-    display: inline-flex;
-    gap: 30px;
-    list-style: none;
-    padding: 12px 30px;
-    background: rgba(255,255,255,0.03);
-    border-radius: 50px;
-    border: 1px solid rgba(255,255,255,0.05);
+.header-left .logo-link img {
+  height: 40px;
+  width: 40px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 50%;
+  display: block;
+  transition: transform 0.3s ease;
+}
+.header-left .logo-link img:hover {
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 8px #db2777);
 }
 
-nav a {
-    color: var(--text-muted);
-    text-decoration: none;
-    font-family: var(--font-heading);
-    font-weight: 700;
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    transition: all 0.3s;
+.header-center ul {
+  display: flex;
+  gap: 5px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 5px;
+  border-radius: 30px;
+}
+.header-center a {
+  position: relative;
+  color: #a1a1aa;
+  text-decoration: none;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 8px 20px;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+}
+.header-center a:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+.header-center a[aria-current=page], .header-center a.active {
+  color: #fff;
+  background: #db2777;
+  box-shadow: 0 0 15px rgba(219, 39, 119, 0.4);
 }
 
-nav a:hover, nav a[aria-current="page"] {
-    color: var(--text-main);
-    text-shadow: 0 0 10px var(--accent-glow);
+.cart-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  padding: 8px 15px;
+  border-radius: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s;
+}
+.cart-btn span {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  font-size: 0.75rem;
+  color: #fff;
+  text-transform: uppercase;
+}
+.cart-btn .cart-count {
+  background: #db2777;
+  color: #fff;
+  padding: 2px 6px;
+  border-radius: 50%;
+  font-size: 0.7rem;
+  box-shadow: 0 0 10px rgba(219, 39, 119, 0.4);
+}
+.cart-btn:hover {
+  border-color: #db2777;
+  background: rgba(219, 39, 119, 0.1);
+  transform: translateY(-2px);
 }
 
 /* 5. LAYOUT & UI COMPONENTS
    ========================================================================== */
 main {
-    max-width: 1200px;
-    margin: 0 auto 80px;
-    padding: 0 5%;
+  padding-top: 140px;
+  max-width: 1200px;
+  margin: 0 auto 80px;
+  padding-left: 5%;
+  padding-right: 5%;
 }
 
-/* Titres avec Barre Latérale Rose */
+.hero-title {
+  text-align: center;
+  margin-bottom: 80px;
+}
+.hero-title h1 {
+  font-family: "Montserrat", sans-serif;
+  font-size: 4.5rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  line-height: 1.1;
+  margin-bottom: 15px;
+  background: linear-gradient(to bottom, #ffffff 0%, #a1a1aa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.5));
+}
+.hero-title .subtitle {
+  display: inline-block;
+  color: #db2777;
+  font-size: 1rem;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  border: 1px solid rgba(219, 39, 119, 0.3);
+  padding: 8px 25px;
+  border-radius: 50px;
+  background: rgba(219, 39, 119, 0.1);
+  box-shadow: 0 0 20px rgba(219, 39, 119, 0.15);
+}
+
 .content-bar {
-    border-left: 4px solid var(--accent);
-    padding-left: 20px;
-    margin-bottom: 2rem;
+  border-left: 4px solid #db2777;
+  padding-left: 20px;
+  margin-bottom: 2rem;
 }
 .content-bar h2 {
-    font-family: var(--font-heading);
-    font-weight: 900;
-    font-size: 2.2rem;
-    text-transform: uppercase;
-    line-height: 1;
-    color: #fff;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 900;
+  font-size: 2.2rem;
+  text-transform: uppercase;
+  line-height: 1;
+  color: #fff;
+  margin: 0;
 }
-.content-bar p { color: var(--text-muted); font-size: 0.9rem; margin-top: 5px; }
+.content-bar p {
+  color: #a1a1aa;
+  font-size: 0.9rem;
+  margin-top: 5px;
+}
 
-/* Boutons */
 .btn {
-    display: inline-block;
-    background: var(--accent);
-    color: #fff;
-    padding: 14px 30px;
-    border-radius: 50px;
-    font-weight: 700;
-    font-family: var(--font-heading);
-    text-transform: uppercase;
-    font-size: 0.9rem;
-    text-decoration: none;
-    border: none;
-    cursor: pointer;
-    box-shadow: 0 0 20px var(--accent-glow);
-    transition: all 0.3s;
+  display: inline-flex; /* Flexbox pour le centrage */
+  align-items: center; /* Vertical */
+  justify-content: center; /* Horizontal */
+  line-height: 1; /* Évite le décalage */
+  background: #db2777;
+  color: #fff;
+  padding: 14px 30px;
+  border-radius: 50px;
+  font-weight: 700;
+  font-family: "Montserrat", sans-serif;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 0 20px rgba(219, 39, 119, 0.4);
+  transition: all 0.3s;
 }
 .btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 0 30px var(--accent-glow);
-    background: lighten(#db2777, 5%);
+  transform: translateY(-2px);
+  box-shadow: 0 0 30px rgba(219, 39, 119, 0.4);
+  background: rgb(222.6428571429, 60.8571428571, 132.7619047619);
 }
 
-/* Styles de Cartes "Verre" (Utilisé partout) */
 .card-glass {
-    background: var(--bg-card);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255,255,255,0.05);
-    border-radius: var(--radius);
-    padding: 30px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-    transition: transform 0.3s ease, border-color 0.3s;
-}
-.card-glass:hover {
-    transform: translateY(-5px);
-    border-color: rgba(219, 39, 119, 0.3);
+  padding: 30px;
 }
 
 /* 6. PAGE ACCUEIL (Sections)
    ========================================================================== */
 .top-split-section {
-    display: flex; gap: 40px; margin-bottom: 100px;
+  display: flex;
+  gap: 40px;
+  margin-bottom: 100px;
 }
-.intro-box { flex: 1.2; } /* Hérite de .card-glass via HTML si tu ajoutes la classe, sinon : */
-.intro-box, .narrative-box {
-    background: var(--bg-card); backdrop-filter: blur(10px);
-    border: 1px solid rgba(255,255,255,0.05); border-radius: var(--radius);
-    padding: 40px;
+
+.intro-box {
+  flex: 1.2;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
 }
-.intro-box .big-intro { font-size: 1.2rem; font-weight: 600; color: #fff; margin-bottom: 1.5rem; }
-
-.narrative-step { margin-bottom: 20px; }
-.narrative-step h3 { color: var(--accent); font-family: var(--font-heading); font-weight: 700; margin-bottom: 5px; }
-
-/* Showreel */
-.showreel-section { margin-bottom: 120px; text-align: center; }
-.video-container {
-    border-radius: var(--radius); overflow: hidden;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.6);
-    border: 1px solid rgba(255,255,255,0.1);
+.intro-box .big-intro {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 1.5rem;
 }
-.video-container video { width: 100%; display: block; }
+.intro-box p {
+  color: #a1a1aa;
+  margin-bottom: 30px;
+}
 
-/* Matériel (Gear) */
-.gear-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
+.narrative-box {
+  flex: 1;
+  padding: 40px;
+}
+.narrative-box .narrative-step {
+  margin-bottom: 20px;
+}
+.narrative-box .narrative-step h3 {
+  color: #db2777;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.showreel-section {
+  margin-bottom: 120px;
+  text-align: center;
+}
+.showreel-section .video-container {
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.showreel-section .video-container video {
+  width: 100%;
+  display: block;
+}
+
+.gear-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+}
+
 .gear-card {
-    background: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01));
-    padding: 30px; border-radius: 16px; text-align: center;
-    border: 1px solid rgba(255,255,255,0.05); transition: 0.3s;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01));
+  padding: 30px;
+  border-radius: 16px;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: 0.3s;
 }
-.gear-card:hover { transform: translateY(-5px); background: rgba(255,255,255,0.08); }
-.gear-card h3 { font-family: var(--font-heading); color: #fff; margin-bottom: 10px; }
-.gear-card p { color: var(--text-muted); font-size: 0.85rem; }
+.gear-card:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.08);
+}
+.gear-card h3 {
+  font-family: "Montserrat", sans-serif;
+  color: #fff;
+  margin-bottom: 10px;
+}
+.gear-card p {
+  color: #a1a1aa;
+  font-size: 0.85rem;
+}
 
-/* 7. PAGE PROJETS (Galerie)
+/* 7. PAGE PROJETS & CATALOGUE
    ========================================================================== */
 .video-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    gap: 40px; margin-bottom: 80px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 40px;
+  margin-bottom: 80px;
 }
+
 .video-wrapper {
-    position: relative; padding-bottom: 56.25%; /* 16:9 */
-    height: 0; overflow: hidden; border-radius: 12px;
-    border: 1px solid rgba(255,255,255,0.1); background: #000;
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #000;
 }
-.video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+.video-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
 
 .photo-gallery {
-    display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
 }
+
 .photo-item {
-    border-radius: 8px; overflow: hidden; height: 300px;
-    position: relative; cursor: pointer; transition: transform 0.3s;
+  border-radius: 8px;
+  overflow: hidden;
+  height: 300px;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.3s;
 }
-.photo-item:hover { transform: scale(1.02); z-index: 2; box-shadow: 0 10px 20px var(--accent-glow); }
-.photo-item img { width: 100%; height: 100%; object-fit: cover; }
+.photo-item:hover {
+  transform: scale(1.02);
+  z-index: 2;
+  box-shadow: 0 10px 20px rgba(219, 39, 119, 0.4);
+}
+.photo-item img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
 
-/* 8. PAGES OFFRES, CONTACT & PANIER (Forms & Tables)
-   ========================================================================== */
-/* Grille Offres */
-.catalog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+.catalog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
 .product-card {
-    background: var(--bg-card); backdrop-filter: blur(10px);
-    border: 1px solid rgba(255,255,255,0.05); border-radius: var(--radius);
-    padding: 30px; display: flex; flex-direction: column; justify-content: space-between;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
-.product-img { width: 100%; height: 200px; object-fit: cover; border-radius: 8px; margin-bottom: 20px; }
-.price-tag { font-size: 1.4rem; font-weight: 900; color: var(--accent); margin: 15px 0; display: block; font-family: var(--font-heading);}
+.product-card .product-img {
+  width: 100%;
+  height: 200px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+.product-card .price-tag {
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: #db2777;
+  margin: 15px 0;
+  display: block;
+  font-family: "Montserrat", sans-serif;
+}
 
-/* Formulaires (Contact) */
-.contact-container { display: flex; gap: 50px; flex-wrap: wrap; }
-.contact-form { flex: 2; min-width: 300px; background: var(--bg-card); padding: 40px; border-radius: var(--radius); }
+/* 8. FORMS & FOOTER
+   ========================================================================== */
+.contact-container {
+  display: flex;
+  gap: 50px;
+  flex-wrap: wrap;
+}
+
+.contact-form {
+  flex: 2;
+  min-width: 300px;
+  padding: 40px;
+}
 
 input, textarea {
-    width: 100%; background: rgba(0,0,0,0.3);
-    border: 1px solid rgba(255,255,255,0.1); color: #fff;
-    padding: 15px; border-radius: 8px; margin-bottom: 20px;
-    font-family: inherit; transition: 0.3s;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-family: inherit;
+  transition: 0.3s;
 }
-input:focus, textarea:focus { border-color: var(--accent); outline: none; background: rgba(0,0,0,0.5); }
-label { display: block; margin-bottom: 8px; font-weight: 700; color: var(--accent); font-family: var(--font-heading); }
+input:focus, textarea:focus {
+  border-color: #db2777;
+  outline: none;
+  background: rgba(0, 0, 0, 0.5);
+}
 
-/* Table Panier */
-.cart-table { width: 100%; border-collapse: collapse; margin-bottom: 30px; }
-.cart-table th { text-align: left; padding: 15px; border-bottom: 2px solid #333; color: var(--accent); font-family: var(--font-heading); }
-.cart-table td { padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 700;
+  color: #db2777;
+  font-family: "Montserrat", sans-serif;
+}
 
-/* 9. FOOTER
-   ========================================================================== */
+.cart-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 30px;
+}
+.cart-table th {
+  text-align: left;
+  padding: 15px;
+  border-bottom: 2px solid #333;
+  color: #db2777;
+  font-family: "Montserrat", sans-serif;
+}
+.cart-table td {
+  padding: 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
 footer {
-    margin-top: 100px; padding: 3rem 5%;
-    background: rgba(0, 0, 0, 0.6);
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-    display: flex; justify-content: space-between; align-items: center;
+  margin-top: 100px;
+  padding: 3rem 5%;
+  background: rgba(0, 0, 0, 0.6);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-.footer-nav a {
-    color: #fff; text-decoration: none; font-size: 0.85rem;
-    font-weight: 700; text-transform: uppercase; margin-left: 30px;
-    font-family: var(--font-heading); opacity: 0.7; transition: 0.3s;
+footer .footer-nav a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-left: 30px;
+  font-family: "Montserrat", sans-serif;
+  opacity: 0.7;
+  transition: 0.3s;
 }
-.footer-nav a:hover { color: var(--accent); opacity: 1; }
-.copyright p { color: var(--text-muted); font-size: 0.85rem; }
+footer .footer-nav a:hover {
+  color: #db2777;
+  opacity: 1;
+}
+footer .copyright p {
+  color: #a1a1aa;
+  font-size: 0.85rem;
+}
 
-/* 10. RESPONSIVE
+/* 9. GLOBAL RESPONSIVE
    ========================================================================== */
 @media (max-width: 900px) {
-    header { flex-direction: column; gap: 10px; }
-    nav ul { flex-direction: column; gap: 15px; width: 100%; }
-    .top-split-section, .contact-container { flex-direction: column; }
-    .gear-grid { grid-template-columns: 1fr; }
-    footer { flex-direction: column; gap: 20px; text-align: center; }
-    .footer-nav a { margin: 0 10px; }
-}
+  header {
+    padding: 0 20px;
+    height: 70px;
+  }
+  .header-center {
+    display: none;
+  }
+  .top-split-section, .contact-container {
+    flex-direction: column;
+  }
+  .gear-grid {
+    grid-template-columns: 1fr;
+  }
+  .hero-title h1 {
+    font-size: 2.5rem;
+    letter-spacing: 2px;
+  }
+  .hero-title .subtitle {
+    font-size: 0.8rem;
+    padding: 6px 15px;
+  }
+  footer {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+  }
+  .footer-nav a {
+    margin: 0 10px;
+  }
+}/*# sourceMappingURL=styles.css.map */

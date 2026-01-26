@@ -13,8 +13,12 @@
 
     <main id="main-content">
         
+        <div class="hero-title fade-in-up">
+            <h1>ELO PRODUCTION</h1>
+            <span class="subtitle">Vidéaste & Monteur Freelance</span>
+        </div>
+
         <div class="top-split-section fade-in-up">
-            
             <section class="intro-box">
                 <div class="content-bar">
                     <h2>Présentation</h2>
@@ -56,24 +60,15 @@
             <div class="content-bar">
                 <h2>Mon Setup & Logiciels</h2>
             </div>
-            
             <div class="gear-grid">
                 <article class="gear-card">
-                    <h3>📸 Caméra</h3>
-                    <p>Sony A6700</p>
-                    <p>Obj. Sigma 18-50mm</p>
+                    <h3>📸 Caméra</h3><p>Sony A6700 + Sigma 18-50mm</p>
                 </article>
-
                 <article class="gear-card">
-                    <h3>🎤 Audio & Stab</h3>
-                    <p>DJI Mic 2</p>
-                    <p>Stabilisateur Ronin</p>
+                    <h3>🎤 Audio & Stab</h3><p>DJI Mic 2 + Ronin</p>
                 </article>
-
                 <article class="gear-card">
-                    <h3>💻 Post-Prod</h3>
-                    <p>Premiere Pro</p>
-                    <p>After Effects</p>
+                    <h3>💻 Post-Prod</h3><p>Premiere Pro + After Effects</p>
                 </article>
             </div>
         </section>
@@ -81,7 +76,6 @@
     </main>
 
     <?php include 'footer.php'; ?>
-    
     <script src="js/main.js"></script>
 
 </body>
