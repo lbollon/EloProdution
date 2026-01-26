@@ -18,10 +18,10 @@
 }
 
 .product-card img {
-    width: 100%;
+    width: 200px;
     height: 200px;
     object-fit: cover;
-    border-radius: 4px;
+    border-radius: 15px;
     margin-bottom: 1rem;
 }
 
@@ -35,4 +35,9 @@
     color: #e50914;
     font-weight: bold;
     margin-bottom: 1rem;
+}
+.photo {
+    position: absolute; 
+    top: 50px;
+    left: 10px;
 }

@@ -23,36 +23,43 @@
     <nav role="navigation">
         <ul>
             <li><a href="index.php">Accueil</a></li>
-            <li><a href="catalog.php" aria-current="page">Prestations</a></li>
+            <li><a href="catalog.php" aria-current="page">Offres</a></li>
             <li><a href="contact.php">Contact</a></li>
         </ul>
     </nav>
 
     <main>
+        <h3>Services</h3>
         <h2>Nos Offres de Production</h2>
         
         <div class="catalog-grid">
-            <article class="product-card">
-                <img src="img/prod-reels.jpg" alt="Montage Reels/TikTok">
-                <h3>Pack Social Media</h3>
-                <p class="price">À partir de 150 €</p>
-                <a href="product.php?id=1" class="btn">Voir détails</a>
+
+            <article class="photo">
+                <img src="img/prod-reels.jpg" alt="Photo">
+                <h3>Photos</h3>
             </article>
 
-            <article class="product-card">
-                <img src="img/prod-event.jpg" alt="Captation Événementielle">
-                <h3>Captation Événement</h3>
-                <p class="price">À partir de 450 €</p>
-                <a href="product.php?id=2" class="btn">Voir détails</a>
+            <article class="Video">
+                <img src="img/prod-event.jpg" alt="Vidéo">
+                <h3>Vidéos</h3>
             </article>
 
-            <article class="product-card">
-                <img src="img/prod-corp.jpg" alt="Film Corporate">
-                <h3>Film Institutionnel</h3>
-                <p class="price">À partir de 800 €</p>
-                <a href="product.php?id=3" class="btn">Voir détails</a>
-            </article>
-        </div>
+            <article class="Montage">
+                <img src="img/prod-corp.jpg" alt="Montage">
+                <h3>Montage</h3>
+             </article>
+
+             <article class="Videophoto">
+                <img src="img/prod-corp.jpg" alt="Vidéos plus Photos">
+                <h3>Vidéo + Photos</h3>
+             </article>
+             
+             <article class="videomontage">
+                <img src="img/prod-corp.jpg" alt="Vidéo plus montage">
+                <h3>Vidéo + Montage</h3>
+             </article>
+       
+         </div>
     </main>
 
     <footer role="contentinfo">

@@ -19,7 +19,7 @@
     <nav>
         <ul>
             <li><a href="index.php">Accueil</a></li>
-            <li><a href="catalog.php">Prestations</a></li>
+            <li><a href="catalog.php">Offres</a></li>
             <li><a href="contact.php">Contact</a></li>
         </ul>
     </nav>
