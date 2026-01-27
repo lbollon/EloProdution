@@ -1,7 +1,37 @@
 <?php 
 session_start(); 
 
-// Vider le panier
+// --- LOGIQUE D'AJOUT AU PANIER ---
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_to_cart'])) {
+    
+    $name = isset($_POST['product_name']) ? $_POST['product_name'] : 'Service';
+    $img = isset($_POST['product_img']) ? $_POST['product_img'] : '';
+    
+    // 1. RÉCUPÉRATION INTELLIGENTE (Prix + Option)
+    // On reçoit "150|Heure supplémentaire"
+    $rawOption = isset($_POST['product_price']) ? $_POST['product_price'] : '0|Standard';
+    
+    // On découpe la chaîne grâce au séparateur '|'
+    $parts = explode('|', $rawOption);
+    
+    $price = isset($parts[0]) ? floatval($parts[0]) : 0;        // 150
+    $optionLabel = isset($parts[1]) ? $parts[1] : 'Standard';   // Heure supplémentaire...
+
+    $newItem = [
+        'name' => $name,
+        'price' => $price,
+        'img' => $img,
+        'option' => $optionLabel // 2. On stocke le nom de l'option
+    ];
+
+    if (!isset($_SESSION['cart'])) { $_SESSION['cart'] = []; }
+    $_SESSION['cart'][] = $newItem;
+
+    header("Location: cart.php");
+    exit();
+}
+
+// --- LOGIQUE POUR VIDER ---
 if(isset($_GET['action']) && $_GET['action'] == 'clear') {
     unset($_SESSION['cart']);
     header("Location: cart.php");
@@ -17,10 +47,11 @@ if(isset($_GET['action']) && $_GET['action'] == 'clear') {
     <link rel="stylesheet" href="css/styles.css">
     <style>
         .cart-table { width: 100%; border-collapse: collapse; margin-bottom: 30px; }
-        .cart-table th { text-align: left; padding: 15px; border-bottom: 2px solid #333; color: #db2777; }
+        .cart-table th { text-align: left; padding: 15px; border-bottom: 2px solid #333; color: #db2777; font-family: 'Montserrat', sans-serif; }
         .cart-table td { padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); }
-        .total-box { text-align: right; font-size: 1.5rem; font-weight: bold; margin-top: 20px; }
-        .empty-cart { text-align: center; padding: 50px; color: #a1a1aa; }
+        .total-box { text-align: right; font-size: 1.5rem; font-weight: bold; margin-top: 20px; width: 100%; font-family: 'Montserrat', sans-serif;}
+        .empty-cart { text-align: center; padding: 50px; color: #a1a1aa; width: 100%; }
+        .cart-actions { margin-top: 30px; display: flex; justify-content: space-between; align-items: center; width: 100%; }
     </style>
 </head>
 <body>
@@ -53,8 +84,13 @@ if(isset($_GET['action']) && $_GET['action'] == 'clear') {
                             $total += $item['price'];
                         ?>
                         <tr>
-                            <td><?php echo htmlspecialchars($item['name']); ?></td>
-                            <td><?php echo htmlspecialchars($item['price']); ?> €</td>
+                            <td>
+                                <strong><?php echo htmlspecialchars($item['name']); ?></strong><br>
+                                <span style="font-size:0.85rem; color:#a1a1aa; font-style:italic;">
+                                    <?php echo isset($item['option']) ? htmlspecialchars($item['option']) : 'Option standard'; ?>
+                                </span>
+                            </td>
+                            <td style="font-weight: bold;"><?php echo htmlspecialchars($item['price']); ?> €</td>
                         </tr>
                         <?php endforeach; ?>
                     </tbody>
@@ -64,7 +100,7 @@ if(isset($_GET['action']) && $_GET['action'] == 'clear') {
                     Total : <span style="color: #fff;"><?php echo $total; ?> €</span>
                 </div>
 
-                <div style="margin-top: 30px; display: flex; justify-content: space-between; align-items: center;">
+                <div class="cart-actions">
                     <a href="cart.php?action=clear" style="color: #a1a1aa; text-decoration: underline;">Vider le panier</a>
                     <a href="contact.php" class="btn">Valider le devis</a>
                 </div>

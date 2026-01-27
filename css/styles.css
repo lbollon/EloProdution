@@ -2,37 +2,7 @@
 /* ==========================================================================
    ELO PRODUCTION - SCSS MASTER (Architecture SASS)
    ========================================================================== */
-/* 1. CONFIGURATION & VARIABLES
-   ========================================================================== */
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap");
-/* 2. MIXINS & PLACEHOLDERS
-   ========================================================================== */
-.contact-form, .product-card, .narrative-box, .intro-box, .card-glass {
-  background: rgba(30, 30, 40, 0.6);
-  -webkit-backdrop-filter: blur(10px);
-          backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 16px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  transition: transform 0.3s ease, border-color 0.3s;
-}
-.contact-form:hover, .product-card:hover, .narrative-box:hover, .intro-box:hover, .card-glass:hover {
-  transform: translateY(-5px);
-  border-color: rgba(219, 39, 119, 0.3);
-}
-
-.fade-in-up {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-}
-.fade-in-up.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* 3. RESET, BASE & BACKGROUND
-   ========================================================================== */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -74,14 +44,35 @@ canvas.particles-js-canvas-el {
   z-index: -1;
 }
 
-/* Accessibilité */
 a:focus, button:focus, input:focus {
   outline: 2px solid #db2777;
   outline-offset: 2px;
 }
 
-/* 4. HEADER & NAVIGATION (Redesign "Floating Neon")
-   ========================================================================== */
+.contact-form, .product-card, .video-card, .gear-card, .narrative-box, .intro-box, .card-glass {
+  background: rgba(30, 30, 40, 0.6);
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, border-color 0.3s;
+}
+.contact-form:hover, .product-card:hover, .video-card:hover, .gear-card:hover, .narrative-box:hover, .intro-box:hover, .card-glass:hover {
+  transform: translateY(-5px);
+  border-color: rgba(219, 39, 119, 0.3);
+}
+
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+.fade-in-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 header {
   position: fixed;
   top: 20px;
@@ -114,11 +105,6 @@ header:hover {
   height: 100%;
 }
 
-.header-left .logo-link {
-  display: flex;
-  align-items: center;
-}
-
 .header-left .logo-link img {
   height: 40px;
   width: 40px;
@@ -138,11 +124,11 @@ header:hover {
   gap: 5px;
   list-style: none;
   margin: 0;
-  padding: 0;
-  background: rgba(255, 255, 255, 0.03);
   padding: 5px;
+  background: rgba(255, 255, 255, 0.03);
   border-radius: 30px;
 }
+
 .header-center a {
   position: relative;
   color: #a1a1aa;
@@ -198,8 +184,68 @@ header:hover {
   transform: translateY(-2px);
 }
 
-/* 5. LAYOUT & UI COMPONENTS
-   ========================================================================== */
+.burger-menu {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+}
+.burger-menu span {
+  width: 25px;
+  height: 3px;
+  background: #fff;
+  border-radius: 2px;
+  transition: 0.3s;
+}
+
+.mobile-nav-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.95);
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.3s;
+}
+.mobile-nav-overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+.mobile-nav-overlay nav {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  text-align: center;
+}
+.mobile-nav-overlay a {
+  color: #fff;
+  font-family: "Montserrat", sans-serif;
+  font-size: 2rem;
+  text-decoration: none;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.mobile-nav-overlay a:hover {
+  color: #db2777;
+}
+.mobile-nav-overlay .close-menu {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 3rem;
+  cursor: pointer;
+}
+
 main {
   padding-top: 140px;
   max-width: 1200px;
@@ -261,10 +307,10 @@ main {
 }
 
 .btn {
-  display: inline-flex; /* Flexbox pour le centrage */
-  align-items: center; /* Vertical */
-  justify-content: center; /* Horizontal */
-  line-height: 1; /* Évite le décalage */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
   background: #db2777;
   color: #fff;
   padding: 14px 30px;
@@ -289,8 +335,6 @@ main {
   padding: 30px;
 }
 
-/* 6. PAGE ACCUEIL (Sections)
-   ========================================================================== */
 .top-split-section {
   display: flex;
   gap: 40px;
@@ -352,16 +396,8 @@ main {
 }
 
 .gear-card {
-  background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01));
   padding: 30px;
-  border-radius: 16px;
   text-align: center;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  transition: 0.3s;
-}
-.gear-card:hover {
-  transform: translateY(-5px);
-  background: rgba(255, 255, 255, 0.08);
 }
 .gear-card h3 {
   font-family: "Montserrat", sans-serif;
@@ -373,90 +409,179 @@ main {
   font-size: 0.85rem;
 }
 
-/* 7. PAGE PROJETS & CATALOGUE
-   ========================================================================== */
-.video-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-  gap: 40px;
-  margin-bottom: 80px;
-}
-
-.video-wrapper {
-  position: relative;
-  padding-bottom: 56.25%;
-  height: 0;
-  overflow: hidden;
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: #000;
-}
-.video-wrapper iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border: 0;
-}
-
-.photo-gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 20px;
-}
-
-.photo-item {
-  border-radius: 8px;
-  overflow: hidden;
-  height: 300px;
-  position: relative;
-  cursor: pointer;
-  transition: transform 0.3s;
-}
-.photo-item:hover {
-  transform: scale(1.02);
-  z-index: 2;
-  box-shadow: 0 10px 20px rgba(219, 39, 119, 0.4);
-}
-.photo-item img {
-  width: 100%;
-  height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
-}
-
-.catalog-grid {
+.catalog-grid, .video-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 30px;
+  margin-top: 40px;
 }
 
-.product-card {
-  padding: 30px;
+.product-card, .video-card {
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  height: 100%;
+  transition: transform 0.3s ease;
 }
-.product-card .product-img {
+.product-card:hover, .video-card:hover {
+  transform: translateY(-10px);
+  border-color: #db2777;
+}
+.product-card:hover .product-img, .product-card:hover .video-thumb, .video-card:hover .product-img, .video-card:hover .video-thumb {
+  transform: scale(1.05);
+}
+.product-card .product-img, .product-card .video-thumb, .video-card .product-img, .video-card .video-thumb {
   width: 100%;
-  height: 200px;
+  height: 250px;
   -o-object-fit: cover;
      object-fit: cover;
-  border-radius: 8px;
-  margin-bottom: 20px;
+  transition: transform 0.5s ease;
+  background-color: #1a1a1a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #333;
 }
-.product-card .price-tag {
+.product-card .product-img img, .product-card .video-thumb img, .video-card .product-img img, .video-card .video-thumb img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.product-card .card-content, .video-card .card-content {
+  padding: 25px;
+  padding-bottom: 35px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+.product-card .card-content h3, .video-card .card-content h3 {
+  font-family: "Montserrat", sans-serif;
   font-size: 1.4rem;
-  font-weight: 900;
-  color: #db2777;
-  margin: 15px 0;
+  margin-bottom: 10px;
+  color: #fff;
+}
+.product-card .card-content p, .video-card .card-content p {
+  color: #a1a1aa;
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+  flex-grow: 1;
+}
+.product-card .card-content .price-tag, .video-card .card-content .price-tag {
   display: block;
+  color: #db2777;
+  font-weight: 700;
+  margin-bottom: 15px;
+  font-family: "Montserrat", sans-serif;
+}
+.product-card .card-content .btn, .video-card .card-content .btn {
+  width: 100%;
+  text-align: center;
+  margin-top: auto;
+}
+
+.product-container {
+  display: flex;
+  gap: 50px;
+  align-items: flex-start;
+  margin-top: 20px;
+}
+@media (max-width: 900px) {
+  .product-container {
+    flex-direction: column;
+  }
+}
+
+.product-image-box {
+  flex: 1;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+  background-color: #1a1a1a;
+  min-height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.product-image-box .main-prod-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.5s;
+}
+.product-image-box .main-prod-img:hover {
+  transform: scale(1.05);
+}
+
+.product-info-box {
+  flex: 1;
+}
+.product-info-box h1 {
+  font-family: "Montserrat", sans-serif;
+  font-size: 2rem;
+  margin-bottom: 10px;
+  line-height: 1.2;
+}
+.product-info-box .price-tag-display {
+  font-size: 1.5rem;
+  color: #db2777;
+  font-weight: 900;
+  margin-bottom: 20px;
+  font-family: "Montserrat", sans-serif;
+}
+.product-info-box .description {
+  color: #a1a1aa;
+  margin-bottom: 30px;
+  line-height: 1.8;
+}
+
+.add-to-cart-form label {
+  display: block;
+  margin-bottom: 10px;
+  color: #fff;
+  font-weight: 600;
   font-family: "Montserrat", sans-serif;
 }
 
-/* 8. FORMS & FOOTER
-   ========================================================================== */
+.custom-select-wrapper {
+  position: relative;
+}
+.custom-select-wrapper select {
+  -moz-appearance: none;
+       appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  padding: 15px 20px;
+  border-radius: 12px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.custom-select-wrapper select:focus {
+  outline: none;
+  border-color: #db2777;
+  box-shadow: 0 0 15px rgba(219, 39, 119, 0.3);
+  background-color: rgba(0, 0, 0, 0.6);
+}
+.custom-select-wrapper select option {
+  background-color: #1a1a1a;
+  color: #fff;
+}
+.custom-select-wrapper .custom-arrow {
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  color: #db2777;
+  pointer-events: none;
+  font-size: 0.8rem;
+}
+
 .contact-container {
   display: flex;
   gap: 50px;
@@ -540,36 +665,118 @@ footer .copyright p {
   font-size: 0.85rem;
 }
 
-/* 9. GLOBAL RESPONSIVE
-   ========================================================================== */
+/* TABLETTE ET PETIT LAPTOP (Max 1024px) */
+@media (max-width: 1024px) {
+  main {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .hero-title h1 {
+    font-size: 3.5rem;
+    letter-spacing: 3px;
+  }
+  .top-split-section {
+    gap: 20px;
+  }
+  .product-container {
+    gap: 30px;
+  }
+}
+/* MOBILE (Max 900px pour changer le header) */
+/* MOBILE (Max 900px) */
 @media (max-width: 900px) {
+  /* 1. HEADER & MENU */
   header {
-    padding: 0 20px;
-    height: 70px;
+    width: 95%;
+    padding: 0 15px;
+    height: 60px;
   }
   .header-center {
     display: none;
-  }
-  .top-split-section, .contact-container {
-    flex-direction: column;
-  }
-  .gear-grid {
-    grid-template-columns: 1fr;
+  } /* Cache le menu PC */
+  .burger-menu {
+    display: flex;
+  } /* Affiche le burger */
+  /* 2. TITRE HERO (Correction du bug d'affichage) */
+  .hero-title {
+    margin-bottom: 40px;
+    padding: 0 10px;
   }
   .hero-title h1 {
-    font-size: 2.5rem;
+    /* Taille fluide : s'adapte à la largeur de l'écran */
+    font-size: clamp(2rem, 10vw, 3.5rem);
     letter-spacing: 2px;
+    line-height: 1.1;
+    word-wrap: break-word; /* Coupe le mot si nécessaire */
+    white-space: normal; /* Autorise le retour à la ligne */
+    width: 100%;
   }
   .hero-title .subtitle {
-    font-size: 0.8rem;
-    padding: 6px 15px;
+    font-size: 0.85rem;
+    padding: 5px 15px;
+    white-space: normal;
+    display: inline-block;
+    margin-top: 10px;
+  }
+  /* 3. LAYOUT GLOBAL */
+  main {
+    padding-top: 100px;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  /* Sections en colonne */
+  .top-split-section,
+  .contact-container,
+  .product-container {
+    flex-direction: column;
+    gap: 30px;
+  }
+  /* Grilles sur 1 colonne */
+  .gear-grid, .catalog-grid, .video-grid {
+    grid-template-columns: 1fr;
+  }
+  /* Boîtes de contenu */
+  .intro-box, .narrative-box, .product-info-box, .contact-form {
+    padding: 25px;
+    width: 100%;
+  }
+  /* Panier & Footer */
+  .cart-actions {
+    flex-direction: column;
+    gap: 15px;
+  }
+  .cart-actions a {
+    text-align: center;
   }
   footer {
     flex-direction: column;
     gap: 20px;
     text-align: center;
   }
-  .footer-nav a {
-    margin: 0 10px;
-  }
+}
+/* Ajout pour les lecteurs vidéo responsive */
+.video-wrapper {
+  position: relative;
+  padding-bottom: 56.25%; /* Ratio 16:9 */
+  height: 0;
+  overflow: hidden;
+  background: #000;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.video-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.project-tags {
+  color: #db2777 !important; /* Force la couleur rose */
+  font-size: 0.85rem !important;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 15px !important;
+  letter-spacing: 1px;
 }/*# sourceMappingURL=styles.css.map */

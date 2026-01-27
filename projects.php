@@ -4,63 +4,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mes Projets - Elo Production</title>
+    <title>Mes Réalisations - Elo Production</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
     <?php include 'header.php'; ?>
 
-    <main>
+    <main id="main-content">
         
-        <div class="content-bar fade-in-up">
-            <h2>Réalisations Vidéo</h2>
-            <p style="color: #a1a1aa; margin-top: 5px;">Publicités, Clips, Contenu Social Media</p>
+        <div class="hero-title fade-in-up">
+            <h1>RÉALISATIONS VIDÉO</h1>
+            <span class="subtitle">Publicités, Clips, Contenu Social Media</span>
         </div>
 
-        <div class="video-grid">
+        <div class="video-grid fade-in-up">
             
-            <div class="fade-in-up">
+            <article class="video-card">
                 <div class="video-wrapper">
-                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Projet 1" allowfullscreen></iframe>
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
-                <h3 style="margin-top: 15px; font-size: 1.2rem;">Clip "Midnight City"</h3>
-                <p style="color: #db2777; font-size: 0.9rem;">Montage • Étalonnage</p>
-            </div>
+                <div class="card-content">
+                    <h3>Clip "Midnight City"</h3>
+                    <p class="project-tags">Montage • Étalonnage • VFX</p>
+                    <a href="contact.php" class="btn">Demander un devis</a>
+                </div>
+            </article>
 
-            <div class="fade-in-up" style="transition-delay: 0.1s;">
+            <article class="video-card">
                 <div class="video-wrapper">
-                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Projet 2" allowfullscreen></iframe>
+                    <iframe src="https://www.youtube.com/embed/ScMzIvxBSi4" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
-                <h3 style="margin-top: 15px; font-size: 1.2rem;">Publicité Restaurant</h3>
-                <p style="color: #db2777; font-size: 0.9rem;">Tournage • Montage</p>
-            </div>
+                <div class="card-content">
+                    <h3>Publicité Restaurant</h3>
+                    <p class="project-tags">Tournage • Montage Dynamique</p>
+                    <a href="contact.php" class="btn">Demander un devis</a>
+                </div>
+            </article>
 
-        </div>
+            <article class="video-card">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/LXb3EKWsInQ" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div class="card-content">
+                    <h3>Vlog Voyage Japon</h3>
+                    <p class="project-tags">Storytelling • Sound Design</p>
+                    <a href="contact.php" class="btn">Demander un devis</a>
+                </div>
+            </article>
 
-        <div class="content-bar fade-in-up" style="margin-top: 80px;">
-            <h2>Photographie</h2>
-            <p style="color: #a1a1aa; margin-top: 5px;">Shooting, Backstage & Portraits</p>
-        </div>
-
-        <div class="photo-gallery fade-in-up">
-            <div class="photo-item">
-                <img src="https://placehold.co/400x600/1e1e24/fff?text=Shooting+Mode" alt="Shooting Mode">
-            </div>
-            <div class="photo-item">
-                <img src="https://placehold.co/600x400/111/fff?text=Backstage" alt="Backstage">
-            </div>
-            <div class="photo-item">
-                <img src="https://placehold.co/400x500/222/fff?text=Portrait" alt="Portrait">
-            </div>
-            <div class="photo-item">
-                <img src="https://placehold.co/500x500/1e1e24/db2777?text=Event" alt="Event">
-            </div>
         </div>
 
     </main>
 
     <?php include 'footer.php'; ?>
     <script src="js/main.js"></script>
+
 </body>
 </html>

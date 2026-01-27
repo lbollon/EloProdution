@@ -1,12 +1,10 @@
 /* ==========================================================================
    ELO PRODUCTION - SCSS MASTER (Architecture SASS)
    ========================================================================== */
-
-/* 1. CONFIGURATION & VARIABLES
-   ========================================================================== */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap');
 
-// Couleurs
+// 1. VARIABLES & CONFIGURATION
+// ==========================================================================
 $bg-dark:       #050505;
 $bg-card:       rgba(30, 30, 40, 0.6); // Effet verre sombre
 $accent:        #db2777; // Ton Rose Signature
@@ -14,59 +12,22 @@ $accent-glow:   rgba(219, 39, 119, 0.4);
 $text-main:     #ffffff;
 $text-muted:    #a1a1aa;
 
-// Typographie
 $font-heading:  'Montserrat', sans-serif;
 $font-body:     'Helvetica Neue', Helvetica, Arial, sans-serif;
-
-// UI
 $radius:        16px;
 
-/* 2. MIXINS & PLACEHOLDERS
-   ========================================================================== */
-
-// L'effet "Verre dépoli" (Glassmorphism)
-%glass-panel {
-    background: $bg-card;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: $radius;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s ease, border-color 0.3s;
-
-    &:hover {
-        transform: translateY(-5px);
-        border-color: rgba(219, 39, 119, 0.3);
-    }
-}
-
-// Animation d'apparition
-.fade-in-up {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-
-    &.visible {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* 3. RESET, BASE & BACKGROUND
-   ========================================================================== */
+// 2. RESET & BASICS
+// ==========================================================================
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 
 body {
     background-color: $bg-dark;
-    
-    // Dégradé d'ambiance
     background-image: 
         radial-gradient(circle at 15% 50%, rgba(30, 30, 60, 0.45) 0%, transparent 30%),
         radial-gradient(circle at 85% 60%, rgba(219, 39, 119, 0.18) 0%, transparent 35%);
-    
     background-attachment: fixed; 
     background-size: cover; 
-
     color: $text-main;
     font-family: $font-body;
     line-height: 1.6;
@@ -76,287 +37,156 @@ body {
 
 // Fond animé (Particules)
 #particles-js {
-    position: fixed;
-    width: 100%; height: 100%;
-    top: 0; left: 0;
-    z-index: -1; 
-    background: transparent;
-    pointer-events: none;
+    position: fixed; width: 100%; height: 100%; top: 0; left: 0; z-index: -1; 
+    background: transparent; pointer-events: none;
+}
+canvas.particles-js-canvas-el { pointer-events: auto; position: absolute; top: 0; left: 0; z-index: -1; }
+
+// Accessibilité
+a:focus, button:focus, input:focus { outline: 2px solid $accent; outline-offset: 2px; }
+
+// Mixins
+%glass-panel {
+    background: $bg-card;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: $radius;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, border-color 0.3s;
+    &:hover { transform: translateY(-5px); border-color: rgba(219, 39, 119, 0.3); }
 }
 
-canvas.particles-js-canvas-el {
-    pointer-events: auto; 
-    position: absolute;
-    top: 0; left: 0;
-    z-index: -1;
+.fade-in-up {
+    opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    &.visible { opacity: 1; transform: translateY(0); }
 }
 
-/* Accessibilité */
-a:focus, button:focus, input:focus { 
-    outline: 2px solid $accent; 
-    outline-offset: 2px; 
-}
-
-/* 4. HEADER & NAVIGATION (Redesign "Floating Neon")
-   ========================================================================== */
+// 3. HEADER & NAVIGATION
+// ==========================================================================
 header {
-    position: fixed;
-    top: 20px; 
-    left: 50%;
-    transform: translateX(-50%); 
-    width: 90%; 
-    max-width: 1200px;
-    height: 70px;
-    z-index: 1000;
-    
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 30px;
-    
-    background: rgba(10, 10, 15, 0.6); 
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 50px; 
+    position: fixed; top: 20px; left: 50%; transform: translateX(-50%); 
+    width: 90%; max-width: 1200px; height: 70px; z-index: 1000;
+    display: flex; justify-content: space-between; align-items: center; padding: 0 30px;
+    background: rgba(10, 10, 15, 0.6); backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 50px; 
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    
     transition: all 0.3s ease;
-
-    &:hover {
-        border-color: rgba(255, 255, 255, 0.2);
-        box-shadow: 0 10px 40px rgba(0,0,0,0.6);
-    }
+    &:hover { border-color: rgba(255, 255, 255, 0.2); box-shadow: 0 10px 40px rgba(0,0,0,0.6); }
 }
 
-// LOGO (Correction du centrage vertical)
-.header-left {
-    display: flex;       // Permet de centrer verticalement le contenu
-    align-items: center; // Centre l'axe Y
-    height: 100%;        // Prend toute la hauteur disponible
-}
-
-.header-left .logo-link {
-    display: flex;       // SUPPRIME l'espace fantôme sous l'image
-    align-items: center; // Centre l'image dans le lien
-}
-
+// Logo
+.header-left { display: flex; align-items: center; height: 100%; }
 .header-left .logo-link img {
-    height: 40px; 
-    width: 40px;       
-    object-fit: cover; 
-    border-radius: 50%; 
-    display: block;      // Sécurité pour éviter le comportement "texte"
-    
+    height: 40px; width: 40px; object-fit: cover; border-radius: 50%; display: block;      
     transition: transform 0.3s ease;
-
-    &:hover {
-        transform: scale(1.1);
-        filter: drop-shadow(0 0 8px $accent);
-    }
+    &:hover { transform: scale(1.1); filter: drop-shadow(0 0 8px $accent); }
 }
 
-// MENU CENTRAL
-.header-center {
-    ul {
-        display: flex;
-        gap: 5px; 
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        background: rgba(255,255,255,0.03);
-        padding: 5px;
-        border-radius: 30px;
-    }
-
-    a {
-        position: relative;
-        color: $text-muted;
-        text-decoration: none;
-        font-family: $font-heading;
-        font-weight: 600;
-        font-size: 0.8rem;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        padding: 8px 20px;
-        border-radius: 20px;
-        transition: all 0.3s ease;
-
-        &:hover {
-            color: #fff;
-            background: rgba(255, 255, 255, 0.1);
-            text-shadow: 0 0 10px rgba(255,255,255,0.5);
-        }
-
-        &[aria-current="page"], &.active {
-            color: #fff;
-            background: $accent; 
-            box-shadow: 0 0 15px $accent-glow;
-        }
-    }
+// Menu Bureau
+.header-center ul {
+    display: flex; gap: 5px; list-style: none; margin: 0; padding: 5px;
+    background: rgba(255,255,255,0.03); border-radius: 30px;
+}
+.header-center a {
+    position: relative; color: $text-muted; text-decoration: none;
+    font-family: $font-heading; font-weight: 600; font-size: 0.8rem;
+    text-transform: uppercase; letter-spacing: 1px; padding: 8px 20px;
+    border-radius: 20px; transition: all 0.3s ease;
+    &:hover { color: #fff; background: rgba(255, 255, 255, 0.1); text-shadow: 0 0 10px rgba(255,255,255,0.5); }
+    &[aria-current="page"], &.active { color: #fff; background: $accent; box-shadow: 0 0 15px $accent-glow; }
 }
 
-// BOUTON PANIER
+// Panier & Droite
 .cart-btn {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    text-decoration: none;
-    padding: 8px 15px;
-    border-radius: 30px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex; align-items: center; gap: 10px; text-decoration: none;
+    padding: 8px 15px; border-radius: 30px; border: 1px solid rgba(255, 255, 255, 0.1);
     transition: all 0.3s;
-
-    span {
-        font-family: $font-heading;
-        font-weight: 700;
-        font-size: 0.75rem;
-        color: #fff;
-        text-transform: uppercase;
-    }
-
-    .cart-count {
-        background: $accent;
-        color: #fff;
-        padding: 2px 6px;
-        border-radius: 50%;
-        font-size: 0.7rem;
-        box-shadow: 0 0 10px $accent-glow;
-    }
-
-    &:hover {
-        border-color: $accent;
-        background: rgba(219, 39, 119, 0.1);
-        transform: translateY(-2px);
-    }
+    span { font-family: $font-heading; font-weight: 700; font-size: 0.75rem; color: #fff; text-transform: uppercase; }
+    .cart-count { background: $accent; color: #fff; padding: 2px 6px; border-radius: 50%; font-size: 0.7rem; box-shadow: 0 0 10px $accent-glow; }
+    &:hover { border-color: $accent; background: rgba(219, 39, 119, 0.1); transform: translateY(-2px); }
 }
 
-/* 5. LAYOUT & UI COMPONENTS
-   ========================================================================== */
-main {
-    padding-top: 140px; 
-    max-width: 1200px;
-    margin: 0 auto 80px;
-    padding-left: 5%;
-    padding-right: 5%;
+// Burger Menu (Mobile)
+.burger-menu {
+    display: none; // Caché par défaut sur PC
+    flex-direction: column; gap: 5px; cursor: pointer;
+    span { width: 25px; height: 3px; background: #fff; border-radius: 2px; transition: 0.3s; }
 }
 
-// HERO TITLE
-.hero-title {
-    text-align: center;
-    margin-bottom: 80px;
+// Overlay Menu Mobile
+.mobile-nav-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+    background: rgba(0,0,0,0.95); z-index: 2000;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    opacity: 0; pointer-events: none; transition: 0.3s;
     
+    &.active { opacity: 1; pointer-events: all; }
+    
+    nav { display: flex; flex-direction: column; gap: 30px; text-align: center; }
+    a { 
+        color: #fff; font-family: $font-heading; font-size: 2rem; 
+        text-decoration: none; font-weight: 700; text-transform: uppercase; 
+        &:hover { color: $accent; } 
+    }
+    .close-menu { 
+        position: absolute; top: 30px; right: 30px; 
+        background: none; border: none; color: #fff; font-size: 3rem; cursor: pointer; 
+    }
+}
+
+
+// 4. UI COMPONENTS & LAYOUT
+// ==========================================================================
+main { padding-top: 140px; max-width: 1200px; margin: 0 auto 80px; padding-left: 5%; padding-right: 5%; }
+
+.hero-title {
+    text-align: center; margin-bottom: 80px;
     h1 {
-        font-family: $font-heading;
-        font-size: 4.5rem;
-        font-weight: 900;
-        text-transform: uppercase;
-        letter-spacing: 5px;
-        line-height: 1.1;
-        margin-bottom: 15px;
-        
+        font-family: $font-heading; font-size: 4.5rem; font-weight: 900;
+        text-transform: uppercase; letter-spacing: 5px; line-height: 1.1; margin-bottom: 15px;
         background: linear-gradient(to bottom, #ffffff 0%, #a1a1aa 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+        -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
     }
-
     .subtitle {
-        display: inline-block;
-        color: $accent;
-        font-size: 1rem;
-        font-family: $font-heading;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 3px;
-        
-        border: 1px solid rgba(219, 39, 119, 0.3);
-        padding: 8px 25px;
-        border-radius: 50px;
-        background: rgba(219, 39, 119, 0.1);
-        box-shadow: 0 0 20px rgba(219, 39, 119, 0.15);
+        display: inline-block; color: $accent; font-size: 1rem; font-family: $font-heading;
+        font-weight: 700; text-transform: uppercase; letter-spacing: 3px;
+        border: 1px solid rgba(219, 39, 119, 0.3); padding: 8px 25px; border-radius: 50px;
+        background: rgba(219, 39, 119, 0.1); box-shadow: 0 0 20px rgba(219, 39, 119, 0.15);
     }
 }
 
-// CONTENT BAR
 .content-bar {
-    border-left: 4px solid $accent;
-    padding-left: 20px;
-    margin-bottom: 2rem;
-
-    h2 {
-        font-family: $font-heading; font-weight: 900; font-size: 2.2rem;
-        text-transform: uppercase; line-height: 1; color: #fff; margin: 0;
-    }
+    border-left: 4px solid $accent; padding-left: 20px; margin-bottom: 2rem;
+    h2 { font-family: $font-heading; font-weight: 900; font-size: 2.2rem; text-transform: uppercase; line-height: 1; color: #fff; margin: 0; }
     p { color: $text-muted; font-size: 0.9rem; margin-top: 5px; }
 }
 
-// BOUTON (MODIFIÉ : Centrage parfait)
 .btn {
-    display: inline-flex;     /* Flexbox pour le centrage */
-    align-items: center;      /* Vertical */
-    justify-content: center;  /* Horizontal */
-    line-height: 1;           /* Évite le décalage */
-    
-    background: $accent;
-    color: #fff;
-    padding: 14px 30px;
-    border-radius: 50px;
-    font-weight: 700;
-    font-family: $font-heading;
-    text-transform: uppercase;
-    font-size: 0.9rem;
-    text-decoration: none;
-    border: none;
-    cursor: pointer;
-    box-shadow: 0 0 20px $accent-glow;
-    transition: all 0.3s;
-
-    &:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 0 30px $accent-glow;
-        background: lighten($accent, 5%);
-    }
+    display: inline-flex; align-items: center; justify-content: center; line-height: 1;
+    background: $accent; color: #fff; padding: 14px 30px; border-radius: 50px;
+    font-weight: 700; font-family: $font-heading; text-transform: uppercase;
+    font-size: 0.9rem; text-decoration: none; border: none; cursor: pointer;
+    box-shadow: 0 0 20px $accent-glow; transition: all 0.3s;
+    &:hover { transform: translateY(-2px); box-shadow: 0 0 30px $accent-glow; background: lighten($accent, 5%); }
 }
 
-// Composant : Carte Verre
-.card-glass {
-    @extend %glass-panel;
-    padding: 30px;
-}
+.card-glass { @extend %glass-panel; padding: 30px; }
 
-/* 6. PAGE ACCUEIL (Sections)
-   ========================================================================== */
-.top-split-section {
-    display: flex; gap: 40px; margin-bottom: 100px;
-}
+
+// 5. PAGES (ACCUEIL)
+// ==========================================================================
+.top-split-section { display: flex; gap: 40px; margin-bottom: 100px; }
 
 .intro-box {
-    @extend %glass-panel;
-    flex: 1.2; 
-    padding: 40px;
-    
-    // Centrage contenu vertical
-    display: flex;
-    flex-direction: column;
-    justify-content: center; 
-    align-items: flex-start; 
-    
-    .big-intro { 
-        font-size: 1.2rem; 
-        font-weight: 600; 
-        color: #fff; 
-        margin-bottom: 1.5rem; 
-    }
-    
-    p { 
-        color: $text-muted; 
-        margin-bottom: 30px; 
-    }
+    @extend %glass-panel; flex: 1.2; padding: 40px;
+    display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
+    .big-intro { font-size: 1.2rem; font-weight: 600; color: #fff; margin-bottom: 1.5rem; }
+    p { color: $text-muted; margin-bottom: 30px; }
 }
 
 .narrative-box {
-    @extend %glass-panel;
-    flex: 1; padding: 40px;
+    @extend %glass-panel; flex: 1; padding: 40px;
     .narrative-step {
         margin-bottom: 20px;
         h3 { color: $accent; font-family: $font-heading; font-weight: 700; margin-bottom: 5px; }
@@ -374,60 +204,88 @@ main {
 }
 
 .gear-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
-
 .gear-card {
-    background: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01));
-    padding: 30px; border-radius: 16px; text-align: center;
-    border: 1px solid rgba(255,255,255,0.05); transition: 0.3s;
-
-    &:hover { transform: translateY(-5px); background: rgba(255,255,255,0.08); }
+    @extend %glass-panel; padding: 30px; text-align: center;
     h3 { font-family: $font-heading; color: #fff; margin-bottom: 10px; }
     p { color: $text-muted; font-size: 0.85rem; }
 }
 
-/* 7. PAGE PROJETS & CATALOGUE
-   ========================================================================== */
-.video-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    gap: 40px; margin-bottom: 80px;
+
+// 6. CATALOGUE & PROJETS
+// ==========================================================================
+.catalog-grid, .video-grid {
+    display: grid;
+    // CORRECTION : Min-width à 300px pour éviter l'empilement sur PC
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px; margin-top: 40px;
 }
 
-.video-wrapper {
-    position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; 
-    border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); background: #000;
-    iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+.product-card, .video-card {
+    @extend %glass-panel; overflow: hidden; display: flex; flex-direction: column; height: 100%;
+    transition: transform 0.3s ease;
+    &:hover { transform: translateY(-10px); border-color: $accent; .product-img, .video-thumb { transform: scale(1.05); } }
+    
+    .product-img, .video-thumb {
+        width: 100%; height: 250px; object-fit: cover; transition: transform 0.5s ease;
+        background-color: #1a1a1a; display: flex; align-items: center; justify-content: center; color: #333;
+        img { width: 100%; height: 100%; object-fit: cover; }
+    }
+    
+    .card-content {
+        padding: 25px; padding-bottom: 35px;
+        display: flex; flex-direction: column; flex-grow: 1;
+        h3 { font-family: $font-heading; font-size: 1.4rem; margin-bottom: 10px; color: #fff; }
+        p { color: $text-muted; font-size: 0.9rem; margin-bottom: 20px; flex-grow: 1; }
+        .price-tag { display: block; color: $accent; font-weight: 700; margin-bottom: 15px; font-family: $font-heading; }
+        .btn { width: 100%; text-align: center; margin-top: auto; }
+    }
 }
 
-.photo-gallery {
-    display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px;
+
+// 7. PAGE PRODUIT (DETAIL)
+// ==========================================================================
+.product-container {
+    display: flex; gap: 50px; align-items: flex-start; margin-top: 20px;
+    @media (max-width: 900px) { flex-direction: column; }
 }
 
-.photo-item {
-    border-radius: 8px; overflow: hidden; height: 300px;
-    position: relative; cursor: pointer; transition: transform 0.3s;
-    &:hover { transform: scale(1.02); z-index: 2; box-shadow: 0 10px 20px $accent-glow; }
-    img { width: 100%; height: 100%; object-fit: cover; }
+.product-image-box {
+    flex: 1; border-radius: $radius; overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 0 30px rgba(0,0,0,0.5);
+    background-color: #1a1a1a; min-height: 300px; display: flex; align-items: center; justify-content: center;
+    .main-prod-img { width: 100%; height: auto; display: block; transition: transform 0.5s; &:hover { transform: scale(1.05); } }
 }
 
-.catalog-grid { 
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; 
+.product-info-box {
+    flex: 1;
+    h1 { font-family: $font-heading; font-size: 2rem; margin-bottom: 10px; line-height: 1.2; }
+    .price-tag-display { font-size: 1.5rem; color: $accent; font-weight: 900; margin-bottom: 20px; font-family: $font-heading; }
+    .description { color: $text-muted; margin-bottom: 30px; line-height: 1.8; }
 }
 
-.product-card {
-    @extend %glass-panel;
-    padding: 30px; display: flex; flex-direction: column; justify-content: space-between;
-    .product-img { width: 100%; height: 200px; object-fit: cover; border-radius: 8px; margin-bottom: 20px; }
-    .price-tag { font-size: 1.4rem; font-weight: 900; color: $accent; margin: 15px 0; display: block; font-family: $font-heading;}
+// Select custom
+.add-to-cart-form label { display: block; margin-bottom: 10px; color: #fff; font-weight: 600; font-family: $font-heading; }
+.custom-select-wrapper {
+    position: relative;
+    select {
+        appearance: none; -webkit-appearance: none; width: 100%;
+        background-color: rgba(0, 0, 0, 0.4); border: 1px solid rgba(255, 255, 255, 0.2);
+        color: #fff; padding: 15px 20px; border-radius: 12px;
+        font-family: $font-body; font-size: 1rem; cursor: pointer; transition: all 0.3s;
+        &:focus { outline: none; border-color: $accent; box-shadow: 0 0 15px rgba($accent, 0.3); background-color: rgba(0, 0, 0, 0.6); }
+        option { background-color: #1a1a1a; color: #fff; }
+    }
+    .custom-arrow { position: absolute; top: 50%; right: 20px; transform: translateY(-50%); color: $accent; pointer-events: none; font-size: 0.8rem; }
 }
 
-/* 8. FORMS & FOOTER
-   ========================================================================== */
+
+// 8. FORMS & FOOTER
+// ==========================================================================
 .contact-container { display: flex; gap: 50px; flex-wrap: wrap; }
 .contact-form { flex: 2; min-width: 300px; @extend %glass-panel; padding: 40px; }
 
 input, textarea {
-    width: 100%; background: rgba(0,0,0,0.3);
-    border: 1px solid rgba(255,255,255,0.1); color: #fff;
+    width: 100%; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); color: #fff;
     padding: 15px; border-radius: 8px; margin-bottom: 20px; font-family: inherit; transition: 0.3s;
     &:focus { border-color: $accent; outline: none; background: rgba(0,0,0,0.5); }
 }
@@ -441,31 +299,109 @@ label { display: block; margin-bottom: 8px; font-weight: 700; color: $accent; fo
 
 footer {
     margin-top: 100px; padding: 3rem 5%;
-    background: rgba(0, 0, 0, 0.6);
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.6); border-top: 1px solid rgba(255, 255, 255, 0.05);
     display: flex; justify-content: space-between; align-items: center;
-
     .footer-nav a {
-        color: #fff; text-decoration: none; font-size: 0.85rem;
-        font-weight: 700; text-transform: uppercase; margin-left: 30px;
-        font-family: $font-heading; opacity: 0.7; transition: 0.3s;
+        color: #fff; text-decoration: none; font-size: 0.85rem; font-weight: 700;
+        text-transform: uppercase; margin-left: 30px; font-family: $font-heading; opacity: 0.7; transition: 0.3s;
         &:hover { color: $accent; opacity: 1; }
     }
     .copyright p { color: $text-muted; font-size: 0.85rem; }
 }
 
-/* 9. GLOBAL RESPONSIVE
-   ========================================================================== */
+
+// 9. RESPONSIVE GLOBAL
+// ==========================================================================
+
+/* TABLETTE ET PETIT LAPTOP (Max 1024px) */
+@media (max-width: 1024px) {
+    main { padding-left: 20px; padding-right: 20px; }
+    .hero-title h1 { font-size: 3.5rem; letter-spacing: 3px; }
+    
+    .top-split-section { gap: 20px; }
+    .product-container { gap: 30px; }
+}
+
+/* MOBILE (Max 900px pour changer le header) */
+/* MOBILE (Max 900px) */
 @media (max-width: 900px) {
-    header { padding: 0 20px; height: 70px; }
-    .header-center { display: none; } 
+    /* 1. HEADER & MENU */
+    header { width: 95%; padding: 0 15px; height: 60px; }
+    .header-center { display: none; } /* Cache le menu PC */
+    .burger-menu { display: flex; }   /* Affiche le burger */
     
-    .top-split-section, .contact-container { flex-direction: column; }
-    .gear-grid { grid-template-columns: 1fr; }
+    /* 2. TITRE HERO (Correction du bug d'affichage) */
+    .hero-title {
+        margin-bottom: 40px;
+        padding: 0 10px;
+        h1 {
+            /* Taille fluide : s'adapte à la largeur de l'écran */
+            font-size: clamp(2rem, 10vw, 3.5rem); 
+            letter-spacing: 2px;
+            line-height: 1.1;
+            word-wrap: break-word; /* Coupe le mot si nécessaire */
+            white-space: normal;   /* Autorise le retour à la ligne */
+            width: 100%;
+        }
+        .subtitle {
+            font-size: 0.85rem;
+            padding: 5px 15px;
+            white-space: normal;
+            display: inline-block;
+            margin-top: 10px;
+        }
+    }
+
+    /* 3. LAYOUT GLOBAL */
+    main { padding-top: 100px; padding-left: 15px; padding-right: 15px; }
     
-    .hero-title h1 { font-size: 2.5rem; letter-spacing: 2px; }
-    .hero-title .subtitle { font-size: 0.8rem; padding: 6px 15px; }
+    /* Sections en colonne */
+    .top-split-section, 
+    .contact-container,
+    .product-container {
+        flex-direction: column; gap: 30px;
+    }
     
+    /* Grilles sur 1 colonne */
+    .gear-grid, .catalog-grid, .video-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Boîtes de contenu */
+    .intro-box, .narrative-box, .product-info-box, .contact-form {
+        padding: 25px; width: 100%;
+    }
+
+    /* Panier & Footer */
+    .cart-actions { flex-direction: column; gap: 15px; }
+    .cart-actions a { text-align: center; }
     footer { flex-direction: column; gap: 20px; text-align: center; }
-    .footer-nav a { margin: 0 10px; }
+}
+
+/* Ajout pour les lecteurs vidéo responsive */
+.video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* Ratio 16:9 */
+    height: 0;
+    overflow: hidden;
+    background: #000;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    
+    iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
+    }
+}
+
+.project-tags {
+    color: $accent !important; /* Force la couleur rose */
+    font-size: 0.85rem !important;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 15px !important;
+    letter-spacing: 1px;
 }
