@@ -48,11 +48,9 @@
             <div class="content-bar" style="margin: 0 auto 30px auto; display: inline-block;">
                 <h2>Showreel 2026</h2>
             </div>
-            <div class="video-container">
-                <video controls poster="img/showreel-poster.jpg">
-                    <source src="video/showreel.mp4" type="video/mp4">
-                    Votre navigateur ne supporte pas la vidéo.
-                </video>
+            
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Showreel Elo Production" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
         </section>
 

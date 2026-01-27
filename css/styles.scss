@@ -405,3 +405,89 @@ footer {
     margin-bottom: 15px !important;
     letter-spacing: 1px;
 }
+
+/* =========================================
+   STYLES GALERIE PHOTO & DESIGN
+   ========================================= */
+
+/* GRILLE PHOTOS */
+.photo-grid {
+    display: grid;
+    // Responsive : colonnes automatiques
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); 
+    gap: 20px;
+    margin-top: 40px;
+}
+
+.photo-card {
+    border-radius: 16px;
+    overflow: hidden;
+    height: 350px; /* Hauteur fixe pour uniformiser */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* L'image remplit la case sans se déformer */
+        transition: transform 0.5s ease;
+    }
+
+    &:hover {
+        transform: translateY(-5px);
+        border-color: #db2777; // Rose au survol
+        
+        img {
+            transform: scale(1.1); // Zoom léger
+        }
+    }
+}
+
+/* GRILLE DESIGN (MINIATURES) */
+.design-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.design-card {
+    background: rgba(30, 30, 40, 0.6); /* Effet verre */
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    padding: 15px;
+    text-align: center;
+    transition: 0.3s;
+
+    img {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+        margin-bottom: 15px;
+        border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    h4 {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 600;
+        color: #fff;
+    }
+
+    &:hover {
+        transform: translateY(-5px);
+        border-color: rgba(219, 39, 119, 0.3);
+    }
+}
+
+/* Responsive pour les grilles */
+@media (max-width: 768px) {
+    .photo-grid, .design-grid {
+        grid-template-columns: 1fr; /* 1 seule colonne sur mobile */
+    }
+    .photo-card {
+        height: 300px;
+    }
+}
