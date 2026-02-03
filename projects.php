@@ -57,7 +57,7 @@
 
             <article class="video-card">
                 <div class="video-wrapper">
-                    <iframe src="https://www.youtube.com/embed/ysz5S6P_ks0" title="Immo" allowfullscreen></iframe>
+                    <iframe src="https://www.youtube.com/embed/T0QJRZni7F0" title="Immo" allowfullscreen></iframe>
                 </div>
                 <div class="card-content">
                     <h3>Villa de Luxe</h3>
@@ -95,23 +95,29 @@
 
         <div class="photo-grid fade-in-up">
             <div class="photo-card">
-                <img src="img/photo1.jpg" alt="Shooting Portrait">
+                <img src="img/SiriusA6700-04.jpg" alt="Shooting Portrait" loading="lazy">
             </div>
+            
             <div class="photo-card">
-                <img src="img/photo2.jpg" alt="Paysage Montagne">
+                <img src="img/SiriusA6700-05.jpg" alt="Shooting Portrait" loading="lazy">
             </div>
+            
              <div class="photo-card">
-                <img src="img/photo3.jpg" alt="Concert Live">
+                <img src="img/SiriusA6700-06.jpg" alt="Shooting Portrait" loading="lazy">
             </div>
+            
              <div class="photo-card">
-                <img src="img/photo4.jpg" alt="Automobile">
+                <img src="img/SiriusA6700-09.jpg" alt="Shooting Portrait" loading="lazy">
             </div>
+            
             <div class="photo-card">
-                <img src="img/photo5.jpg" alt="Architecture">
+                <img src="img/PoloA6700-08 - Copie.jpg" alt="Shooting Portrait" loading="lazy">
             </div>
+            
             <div class="photo-card">
-                <img src="img/photo6.jpg" alt="Street Photography">
+                <img src="img/PoloA6700-16 - Copie.jpg" alt="Shooting Portrait" loading="lazy">
             </div>
+            
         </div>
 
         <div style="text-align: center; margin-top: 80px;" class="fade-in-up">

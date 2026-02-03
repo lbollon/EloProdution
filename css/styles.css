@@ -22,7 +22,10 @@ body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   line-height: 1.6;
   overflow-x: hidden;
+  /* --- FIX STICKY FOOTER --- */
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 #particles-js {
@@ -252,6 +255,9 @@ main {
   margin: 0 auto 80px;
   padding-left: 5%;
   padding-right: 5%;
+  /* --- FIX STICKY FOOTER --- */
+  width: 100%;
+  flex: 1;
 }
 
 .hero-title {
@@ -480,6 +486,32 @@ main {
   margin-top: auto;
 }
 
+.video-wrapper {
+  position: relative;
+  padding-bottom: 56.25%; /* Ratio 16:9 */
+  height: 0;
+  overflow: hidden;
+  background: #000;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.video-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.project-tags {
+  color: #db2777 !important;
+  font-size: 0.85rem !important;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 15px !important;
+  letter-spacing: 1px;
+}
+
 .product-container {
   display: flex;
   gap: 50px;
@@ -665,6 +697,37 @@ footer .copyright p {
   font-size: 0.85rem;
 }
 
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  margin-top: 40px;
+}
+
+.photo-card {
+  border-radius: 16px;
+  overflow: hidden;
+  height: 350px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+.photo-card img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  transition: transform 0.5s ease;
+}
+.photo-card:hover {
+  transform: translateY(-5px);
+  border-color: #db2777;
+}
+.photo-card:hover img {
+  transform: scale(1.1);
+}
+
 /* TABLETTE ET PETIT LAPTOP (Max 1024px) */
 @media (max-width: 1024px) {
   main {
@@ -682,10 +745,9 @@ footer .copyright p {
     gap: 30px;
   }
 }
-/* MOBILE (Max 900px pour changer le header) */
 /* MOBILE (Max 900px) */
 @media (max-width: 900px) {
-  /* 1. HEADER & MENU */
+  /* Header Compact */
   header {
     width: 95%;
     padding: 0 15px;
@@ -693,22 +755,21 @@ footer .copyright p {
   }
   .header-center {
     display: none;
-  } /* Cache le menu PC */
+  }
   .burger-menu {
     display: flex;
-  } /* Affiche le burger */
-  /* 2. TITRE HERO (Correction du bug d'affichage) */
+  }
+  /* Titre Hero Fluide */
   .hero-title {
     margin-bottom: 40px;
     padding: 0 10px;
   }
   .hero-title h1 {
-    /* Taille fluide : s'adapte à la largeur de l'écran */
     font-size: clamp(2rem, 10vw, 3.5rem);
     letter-spacing: 2px;
     line-height: 1.1;
-    word-wrap: break-word; /* Coupe le mot si nécessaire */
-    white-space: normal; /* Autorise le retour à la ligne */
+    word-wrap: break-word;
+    white-space: normal;
     width: 100%;
   }
   .hero-title .subtitle {
@@ -718,29 +779,29 @@ footer .copyright p {
     display: inline-block;
     margin-top: 10px;
   }
-  /* 3. LAYOUT GLOBAL */
+  /* Sections en colonne */
   main {
     padding-top: 100px;
     padding-left: 15px;
     padding-right: 15px;
   }
-  /* Sections en colonne */
-  .top-split-section,
-  .contact-container,
-  .product-container {
+  .top-split-section, .contact-container, .product-container {
     flex-direction: column;
     gap: 30px;
   }
   /* Grilles sur 1 colonne */
-  .gear-grid, .catalog-grid, .video-grid {
+  .gear-grid, .catalog-grid, .video-grid, .photo-grid {
     grid-template-columns: 1fr;
   }
-  /* Boîtes de contenu */
+  .photo-card {
+    height: 300px;
+  }
+  /* Padding réduit */
   .intro-box, .narrative-box, .product-info-box, .contact-form {
     padding: 25px;
     width: 100%;
   }
-  /* Panier & Footer */
+  /* Footer & Panier empilés */
   .cart-actions {
     flex-direction: column;
     gap: 15px;
@@ -752,111 +813,5 @@ footer .copyright p {
     flex-direction: column;
     gap: 20px;
     text-align: center;
-  }
-}
-/* Ajout pour les lecteurs vidéo responsive */
-.video-wrapper {
-  position: relative;
-  padding-bottom: 56.25%; /* Ratio 16:9 */
-  height: 0;
-  overflow: hidden;
-  background: #000;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-.video-wrapper iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border: 0;
-}
-
-.project-tags {
-  color: #db2777 !important; /* Force la couleur rose */
-  font-size: 0.85rem !important;
-  font-weight: 600;
-  text-transform: uppercase;
-  margin-bottom: 15px !important;
-  letter-spacing: 1px;
-}
-
-/* =========================================
-   STYLES GALERIE PHOTO & DESIGN
-   ========================================= */
-/* GRILLE PHOTOS */
-.photo-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 20px;
-  margin-top: 40px;
-}
-
-.photo-card {
-  border-radius: 16px;
-  overflow: hidden;
-  height: 350px; /* Hauteur fixe pour uniformiser */
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-  transition: transform 0.3s ease;
-  cursor: pointer;
-}
-.photo-card img {
-  width: 100%;
-  height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover; /* L'image remplit la case sans se déformer */
-  transition: transform 0.5s ease;
-}
-.photo-card:hover {
-  transform: translateY(-5px);
-  border-color: #db2777;
-}
-.photo-card:hover img {
-  transform: scale(1.1);
-}
-
-/* GRILLE DESIGN (MINIATURES) */
-.design-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 30px;
-  margin-top: 40px;
-}
-
-.design-card {
-  background: rgba(30, 30, 40, 0.6); /* Effet verre */
-  -webkit-backdrop-filter: blur(10px);
-          backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 16px;
-  padding: 15px;
-  text-align: center;
-  transition: 0.3s;
-}
-.design-card img {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-  margin-bottom: 15px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-.design-card h4 {
-  font-family: "Montserrat", sans-serif;
-  font-weight: 600;
-  color: #fff;
-}
-.design-card:hover {
-  transform: translateY(-5px);
-  border-color: rgba(219, 39, 119, 0.3);
-}
-
-/* Responsive pour les grilles */
-@media (max-width: 768px) {
-  .photo-grid, .design-grid {
-    grid-template-columns: 1fr; /* 1 seule colonne sur mobile */
-  }
-  .photo-card {
-    height: 300px;
   }
 }/*# sourceMappingURL=styles.css.map */
