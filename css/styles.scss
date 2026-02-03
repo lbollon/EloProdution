@@ -33,7 +33,7 @@ body {
     line-height: 1.6;
     overflow-x: hidden;
     
-    /* --- FIX STICKY FOOTER --- */
+    /* --- FIX STICKY FOOTER (Garde le footer en bas) --- */
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -49,7 +49,7 @@ canvas.particles-js-canvas-el { pointer-events: auto; position: absolute; top: 0
 // Accessibilité
 a:focus, button:focus, input:focus { outline: 2px solid $accent; outline-offset: 2px; }
 
-// Mixins
+// Mixins & Styles Globaux
 %glass-panel {
     background: $bg-card;
     backdrop-filter: blur(10px);
@@ -297,30 +297,12 @@ main {
     .description { color: $text-muted; margin-bottom: 30px; line-height: 1.8; }
 }
 
-// Select custom
-.add-to-cart-form label { display: block; margin-bottom: 10px; color: #fff; font-weight: 600; font-family: $font-heading; }
-.custom-select-wrapper {
-    position: relative;
-    select {
-        appearance: none; -webkit-appearance: none; width: 100%;
-        background-color: rgba(0, 0, 0, 0.4); border: 1px solid rgba(255, 255, 255, 0.2);
-        color: #fff; padding: 15px 20px; border-radius: 12px;
-        font-family: $font-body; font-size: 1rem; cursor: pointer; transition: all 0.3s;
-        &:focus { outline: none; border-color: $accent; box-shadow: 0 0 15px rgba($accent, 0.3); background-color: rgba(0, 0, 0, 0.6); }
-        option { background-color: #1a1a1a; color: #fff; }
-    }
-    .custom-arrow { position: absolute; top: 50%; right: 20px; transform: translateY(-50%); color: $accent; pointer-events: none; font-size: 0.8rem; }
-}
-
-
-// 8. FORMS & FOOTER
+// 8. FORMS (CONTACT & PANIER)
 // ==========================================================================
 .contact-container { display: flex; gap: 50px; flex-wrap: wrap; }
 .contact-form { flex: 2; min-width: 300px; @extend %glass-panel; padding: 40px; }
 
-/* --- CORRECTION DU MENU DÉROULANT (SELECT) --- */
-
-/* On applique le style à input, textarea ET select */
+/* INPUTS UNIFIÉS (Valable pour contact, ajout panier, etc) */
 input, textarea, select {
     width: 100%; 
     background: rgba(0,0,0,0.3); 
@@ -331,51 +313,37 @@ input, textarea, select {
     margin-bottom: 20px; 
     font-family: inherit; 
     transition: 0.3s;
-    
-    /* Supprime le style blanc moche du navigateur */
-    appearance: none; 
-    -webkit-appearance: none; 
+    /* Reset style navigateur */
+    appearance: none; -webkit-appearance: none; 
 
     &:focus { border-color: $accent; outline: none; background: rgba(0,0,0,0.5); }
 }
 
-/* On ajoute une petite flèche personnalisée rose pour le menu */
+/* Custom Select avec flèche rose */
 select {
     cursor: pointer;
-    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23db2777%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E');
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23db2777' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
     background-repeat: no-repeat;
     background-position: right 15px top 50%;
-    background-size: 12px auto;
+    background-size: 16px;
+    padding-right: 40px;
 }
-
-/* Important : Fond noir quand on ouvre la liste d'options */
-select option {
-    background-color: #050505;
-    color: #fff;
-}
+/* Options sur fond noir */
+select option { background-color: $bg-dark; color: #fff; }
 
 label { display: block; margin-bottom: 8px; font-weight: 700; color: $accent; font-family: $font-heading; }
 
+/* TABLEAU PANIER */
 .cart-table {
     width: 100%; border-collapse: collapse; margin-bottom: 30px;
     th { text-align: left; padding: 15px; border-bottom: 2px solid #333; color: $accent; font-family: $font-heading; }
     td { padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); }
 }
+.empty-cart { text-align: center; padding: 50px; color: $text-muted; }
+.total-box { text-align: right; font-size: 1.5rem; font-weight: bold; margin-top: 20px; span { color: #fff; } }
+.cart-actions { margin-top: 30px; display: flex; justify-content: space-between; align-items: center; }
 
-footer {
-    margin-top: 100px; padding: 3rem 5%;
-    background: rgba(0, 0, 0, 0.6); border-top: 1px solid rgba(255, 255, 255, 0.05);
-    display: flex; justify-content: space-between; align-items: center;
-    .footer-nav a {
-        color: #fff; text-decoration: none; font-size: 0.85rem; font-weight: 700;
-        text-transform: uppercase; margin-left: 30px; font-family: $font-heading; opacity: 0.7; transition: 0.3s;
-        &:hover { color: $accent; opacity: 1; }
-    }
-    .copyright p { color: $text-muted; font-size: 0.85rem; }
-}
-
-
-// 9. GALERIE PHOTO (Pour la page Projets)
+// 9. GALERIE PHOTO (Projets)
 // ==========================================================================
 .photo-grid {
     display: grid;
@@ -396,17 +364,31 @@ footer {
     img {
         width: 100%; height: 100%; object-fit: cover; 
         transition: transform 0.5s ease;
+        display: block; 
     }
 
     &:hover {
         transform: translateY(-5px);
-        border-color: #db2777; // Rose au survol
+        border-color: $accent;
         img { transform: scale(1.1); }
     }
 }
 
+// 10. FOOTER & MENTIONS LÉGALES
+// ==========================================================================
+footer {
+    margin-top: 100px; padding: 3rem 5%;
+    background: rgba(0, 0, 0, 0.6); border-top: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex; justify-content: space-between; align-items: center;
+    .footer-nav a {
+        color: #fff; text-decoration: none; font-size: 0.85rem; font-weight: 700;
+        text-transform: uppercase; margin-left: 30px; font-family: $font-heading; opacity: 0.7; transition: 0.3s;
+        &:hover { color: $accent; opacity: 1; }
+    }
+    .copyright p { color: $text-muted; font-size: 0.85rem; }
+}
 
-// 10. RESPONSIVE GLOBAL (Optimisé)
+// 11. RESPONSIVE GLOBAL
 // ==========================================================================
 
 /* TABLETTE ET PETIT LAPTOP (Max 1024px) */
