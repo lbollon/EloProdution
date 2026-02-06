@@ -1,13 +1,10 @@
-/* ==========================================================================
-   ELO PRODUCTION - SCSS MASTER (Architecture SASS)
-   ========================================================================== */
+/* Styles Elo Production */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap');
 
-// 1. VARIABLES & CONFIGURATION
-// ==========================================================================
+/* --- Variables --- */
 $bg-dark:       #050505;
-$bg-card:       rgba(30, 30, 40, 0.6); // Effet verre sombre
-$accent:        #db2777; // Ton Rose Signature
+$bg-card:       rgba(30, 30, 40, 0.6);
+$accent:        #db2777; 
 $accent-glow:   rgba(219, 39, 119, 0.4);
 $text-main:     #ffffff;
 $text-muted:    #a1a1aa;
@@ -16,8 +13,7 @@ $font-heading:  'Montserrat', sans-serif;
 $font-body:     'Helvetica Neue', Helvetica, Arial, sans-serif;
 $radius:        16px;
 
-// 2. RESET & BASICS
-// ==========================================================================
+/* --- Reset & Base --- */
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 
@@ -33,23 +29,23 @@ body {
     line-height: 1.6;
     overflow-x: hidden;
     
-    /* --- FIX STICKY FOOTER (Garde le footer en bas) --- */
+    /* Footer toujours en bas */
     min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
 
-// Fond animé (Particules)
+/* Particules background */
 #particles-js {
     position: fixed; width: 100%; height: 100%; top: 0; left: 0; z-index: -1; 
     background: transparent; pointer-events: none;
 }
 canvas.particles-js-canvas-el { pointer-events: auto; position: absolute; top: 0; left: 0; z-index: -1; }
 
-// Accessibilité
+/* Focus accessibilité */
 a:focus, button:focus, input:focus { outline: 2px solid $accent; outline-offset: 2px; }
 
-// Mixins & Styles Globaux
+/* Styles globaux / Glassmorphism */
 %glass-panel {
     background: $bg-card;
     backdrop-filter: blur(10px);
@@ -65,8 +61,7 @@ a:focus, button:focus, input:focus { outline: 2px solid $accent; outline-offset:
     &.visible { opacity: 1; transform: translateY(0); }
 }
 
-// 3. HEADER & NAVIGATION
-// ==========================================================================
+/* --- Header --- */
 header {
     position: fixed; top: 20px; left: 50%; transform: translateX(-50%); 
     width: 90%; max-width: 1200px; height: 70px; z-index: 1000;
@@ -78,7 +73,6 @@ header {
     &:hover { border-color: rgba(255, 255, 255, 0.2); box-shadow: 0 10px 40px rgba(0,0,0,0.6); }
 }
 
-// Logo
 .header-left { display: flex; align-items: center; height: 100%; }
 .header-left .logo-link img {
     height: 40px; width: 40px; object-fit: cover; border-radius: 50%; display: block;      
@@ -86,7 +80,7 @@ header {
     &:hover { transform: scale(1.1); filter: drop-shadow(0 0 8px $accent); }
 }
 
-// Menu Bureau
+/* Nav Bureau */
 .header-center ul {
     display: flex; gap: 5px; list-style: none; margin: 0; padding: 5px;
     background: rgba(255,255,255,0.03); border-radius: 30px;
@@ -100,7 +94,6 @@ header {
     &[aria-current="page"], &.active { color: #fff; background: $accent; box-shadow: 0 0 15px $accent-glow; }
 }
 
-// Panier & Droite
 .cart-btn {
     display: flex; align-items: center; gap: 10px; text-decoration: none;
     padding: 8px 15px; border-radius: 30px; border: 1px solid rgba(255, 255, 255, 0.1);
@@ -110,14 +103,13 @@ header {
     &:hover { border-color: $accent; background: rgba(219, 39, 119, 0.1); transform: translateY(-2px); }
 }
 
-// Burger Menu (Mobile)
+/* Menu Mobile */
 .burger-menu {
-    display: none; // Caché par défaut sur PC
+    display: none; 
     flex-direction: column; gap: 5px; cursor: pointer;
     span { width: 25px; height: 3px; background: #fff; border-radius: 2px; transition: 0.3s; }
 }
 
-// Overlay Menu Mobile
 .mobile-nav-overlay {
     position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
     background: rgba(0,0,0,0.95); z-index: 2000;
@@ -139,18 +131,15 @@ header {
 }
 
 
-// 4. UI COMPONENTS & LAYOUT
-// ==========================================================================
+/* --- Layout Général --- */
 main { 
     padding-top: 140px; 
     max-width: 1200px; 
     margin: 0 auto 80px; 
     padding-left: 5%; 
     padding-right: 5%;
-    
-    /* --- FIX STICKY FOOTER --- */
     width: 100%;
-    flex: 1; // Pousse le footer vers le bas
+    flex: 1;
 }
 
 .hero-title {
@@ -188,8 +177,7 @@ main {
 .card-glass { @extend %glass-panel; padding: 30px; }
 
 
-// 5. PAGES (ACCUEIL)
-// ==========================================================================
+/* --- Accueil --- */
 .top-split-section { display: flex; gap: 40px; margin-bottom: 100px; }
 
 .intro-box {
@@ -225,11 +213,10 @@ main {
 }
 
 
-// 6. CATALOGUE & PROJETS
-// ==========================================================================
+/* --- Catalogues & Grilles --- */
 .catalog-grid, .video-grid {
     display: grid;
-    // CORRECTION : Min-width à 300px pour éviter l'empilement sur PC
+    /* Min-width pour éviter les bugs d'affichage sur PC */
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 30px; margin-top: 40px;
 }
@@ -255,10 +242,10 @@ main {
     }
 }
 
-// VIDÉOS RESPONSIVE (16:9)
+/* Ratio 16:9 pour les vidéos */
 .video-wrapper {
     position: relative;
-    padding-bottom: 56.25%; /* Ratio 16:9 */
+    padding-bottom: 56.25%; 
     height: 0;
     overflow: hidden;
     background: #000;
@@ -276,10 +263,12 @@ main {
 }
 
 
-// 7. PAGE PRODUIT (DETAIL)
-// ==========================================================================
+/* --- Page Produit --- */
 .product-container {
-    display: flex; gap: 50px; align-items: flex-start; margin-top: 20px;
+    display: flex; 
+    gap: 50px; 
+    align-items: center; /* Centrage vertical */
+    margin-top: 20px;
     @media (max-width: 900px) { flex-direction: column; }
 }
 
@@ -297,12 +286,11 @@ main {
     .description { color: $text-muted; margin-bottom: 30px; line-height: 1.8; }
 }
 
-// 8. FORMS (CONTACT & PANIER)
-// ==========================================================================
+/* --- Formulaires (Contact & Panier) --- */
 .contact-container { display: flex; gap: 50px; flex-wrap: wrap; }
 .contact-form { flex: 2; min-width: 300px; @extend %glass-panel; padding: 40px; }
 
-/* INPUTS UNIFIÉS (Valable pour contact, ajout panier, etc) */
+/* Styles des inputs */
 input, textarea, select {
     width: 100%; 
     background: rgba(0,0,0,0.3); 
@@ -313,13 +301,12 @@ input, textarea, select {
     margin-bottom: 20px; 
     font-family: inherit; 
     transition: 0.3s;
-    /* Reset style navigateur */
     appearance: none; -webkit-appearance: none; 
 
     &:focus { border-color: $accent; outline: none; background: rgba(0,0,0,0.5); }
 }
 
-/* Custom Select avec flèche rose */
+/* Select perso avec flèche SVG */
 select {
     cursor: pointer;
     background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23db2777' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
@@ -328,12 +315,11 @@ select {
     background-size: 16px;
     padding-right: 40px;
 }
-/* Options sur fond noir */
 select option { background-color: $bg-dark; color: #fff; }
 
 label { display: block; margin-bottom: 8px; font-weight: 700; color: $accent; font-family: $font-heading; }
 
-/* TABLEAU PANIER */
+/* Panier */
 .cart-table {
     width: 100%; border-collapse: collapse; margin-bottom: 30px;
     th { text-align: left; padding: 15px; border-bottom: 2px solid #333; color: $accent; font-family: $font-heading; }
@@ -343,8 +329,7 @@ label { display: block; margin-bottom: 8px; font-weight: 700; color: $accent; fo
 .total-box { text-align: right; font-size: 1.5rem; font-weight: bold; margin-top: 20px; span { color: #fff; } }
 .cart-actions { margin-top: 30px; display: flex; justify-content: space-between; align-items: center; }
 
-// 9. GALERIE PHOTO (Projets)
-// ==========================================================================
+/* --- Galerie Projets --- */
 .photo-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); 
@@ -374,8 +359,7 @@ label { display: block; margin-bottom: 8px; font-weight: 700; color: $accent; fo
     }
 }
 
-// 10. FOOTER & MENTIONS LÉGALES
-// ==========================================================================
+/* --- Footer --- */
 footer {
     margin-top: 100px; padding: 3rem 5%;
     background: rgba(0, 0, 0, 0.6); border-top: 1px solid rgba(255, 255, 255, 0.05);
@@ -388,10 +372,9 @@ footer {
     .copyright p { color: $text-muted; font-size: 0.85rem; }
 }
 
-// 11. RESPONSIVE GLOBAL
-// ==========================================================================
+/* --- Responsive --- */
 
-/* TABLETTE ET PETIT LAPTOP (Max 1024px) */
+/* Tablettes / Laptop */
 @media (max-width: 1024px) {
     main { padding-left: 20px; padding-right: 20px; }
     .hero-title h1 { font-size: 3.5rem; letter-spacing: 3px; }
@@ -399,14 +382,12 @@ footer {
     .product-container { gap: 30px; }
 }
 
-/* MOBILE (Max 900px) */
+/* Mobile */
 @media (max-width: 900px) {
-    /* Header Compact */
     header { width: 95%; padding: 0 15px; height: 60px; }
     .header-center { display: none; }
     .burger-menu { display: flex; }
     
-    /* Titre Hero Fluide */
     .hero-title {
         margin-bottom: 40px; padding: 0 10px;
         h1 {
@@ -420,18 +401,14 @@ footer {
         }
     }
 
-    /* Sections en colonne */
     main { padding-top: 100px; padding-left: 15px; padding-right: 15px; }
     .top-split-section, .contact-container, .product-container { flex-direction: column; gap: 30px; }
     
-    /* Grilles sur 1 colonne */
     .gear-grid, .catalog-grid, .video-grid, .photo-grid { grid-template-columns: 1fr; }
     .photo-card { height: 300px; }
 
-    /* Padding réduit */
     .intro-box, .narrative-box, .product-info-box, .contact-form { padding: 25px; width: 100%; }
 
-    /* Footer & Panier empilés */
     .cart-actions { flex-direction: column; gap: 15px; }
     .cart-actions a { text-align: center; }
     footer { flex-direction: column; gap: 20px; text-align: center; }

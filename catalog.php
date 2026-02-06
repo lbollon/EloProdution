@@ -21,7 +21,7 @@
         <div class="catalog-grid fade-in-up">
             
             <div class="product-card">
-                <img src="img/montage-cover.jpg" alt="Montage Vidéo" class="product-img">
+                <img src="img/a6700.jpeg" alt="Montage Vidéo" class="product-img">
                 <div class="card-content">
                     <h3>Montage Vidéo</h3>
                     <p>Pour vos vlogs, documentaires ou vidéos corporate. Montage dynamique et narratif.</p>
@@ -31,7 +31,7 @@
             </div>
 
             <div class="product-card">
-                <img src="img/prod-reels-large.jpg" alt="Pack Social Media" class="product-img">
+                <img src="img/a6700.jpeg" alt="Pack Social Media" class="product-img">
                 <div class="card-content">
                     <h3>Pack Réseaux Sociaux</h3>
                     <p>Shorts, Reels, TikToks. Optimisé pour la rétention et l'algorithme.</p>
@@ -41,7 +41,7 @@
             </div>
 
             <div class="product-card">
-                <img src="img/shooting-cover.jpg" alt="Shooting Vidéo" class="product-img">
+                <img src="img/a6700.jpeg" alt="Shooting Vidéo" class="product-img">
                 <div class="card-content">
                     <h3>Shooting / Captation</h3>
                     <p>Je viens filmer votre événement, clip ou interview avec mon matériel.</p>

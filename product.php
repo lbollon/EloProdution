@@ -1,11 +1,12 @@
 <?php 
 session_start(); 
 
-// 1. DÉFINITION DES DONNÉES (C'est ici que tu modifies tes prix et textes)
+// 1. DÉFINITION DES DONNÉES
 $products = [
     'montage' => [
         'title' => 'Montage Vidéo (Vlog/Docu)',
-        'img' => 'img/montage-detail.jpg', // Mets une image correspondante
+        // ✅ IMAGE CAMÉRA
+        'img' => 'img/a6700.jpeg', 
         'desc' => 'Confiez-moi vos rushes. Je réalise un montage rythmé, avec étalonnage et sound design professionnel. Idéal pour YouTube ou présentation d\'entreprise.',
         'options' => [
             ['price' => 200, 'label' => 'Montage Simple (< 5 min) - 200€'],
@@ -15,7 +16,8 @@ $products = [
     ],
     'pack' => [
         'title' => 'Pack Social Media (Vertical)',
-        'img' => 'img/prod-reels-large.jpg',
+        // ✅ IMAGE CAMÉRA (au lieu du logo)
+        'img' => 'img/a6700.jpeg', 
         'desc' => 'Boostez votre visibilité avec des formats courts (Reels/TikTok). Inclus : Derush, Sous-titres dynamiques, Hooks visuels.',
         'options' => [
             ['price' => 150, 'label' => 'Pack Découverte (1 Vidéo) - 150€'],
@@ -25,7 +27,8 @@ $products = [
     ],
     'shooting' => [
         'title' => 'Shooting & Captation',
-        'img' => 'img/shooting-detail.jpg', // Mets une image correspondante
+        // ✅ IMAGE CAMÉRA
+        'img' => 'img/a6700.jpeg', 
         'desc' => 'Je me déplace avec mon matériel (Sony A6700, Lumières, Micro) pour filmer votre projet. Qualité 4K S-Log3.',
         'options' => [
             ['price' => 350, 'label' => 'Demi-journée (4h) - 350€'],
@@ -36,7 +39,7 @@ $products = [
 ];
 
 // 2. RÉCUPÉRATION DU PRODUIT CHOISI
-$productId = isset($_GET['id']) ? $_GET['id'] : 'pack'; // Par défaut 'pack' si rien n'est précisé
+$productId = isset($_GET['id']) ? $_GET['id'] : 'pack'; 
 $currentProduct = isset($products[$productId]) ? $products[$productId] : $products['pack'];
 
 ?>
@@ -61,7 +64,7 @@ $currentProduct = isset($products[$productId]) ? $products[$productId] : $produc
         <div class="product-container fade-in-up">
             
             <div class="product-image-box">
-                <img src="<?php echo file_exists($currentProduct['img']) ? $currentProduct['img'] : 'img/prod-reels-large.jpg'; ?>" 
+                <img src="<?php echo file_exists($currentProduct['img']) ? $currentProduct['img'] : 'img/a6700.jpeg'; ?>" 
                      alt="<?php echo $currentProduct['title']; ?>" 
                      class="main-prod-img">
             </div>
@@ -88,7 +91,6 @@ $currentProduct = isset($products[$productId]) ? $products[$productId] : $produc
                                 </option>
                             <?php endforeach; ?>
                         </select>
-                        <span class="custom-arrow">▼</span>
                     </div>
 
                     <button type="submit" class="btn" style="width: 100%; margin-top: 20px;">
