@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mentions Légales - Elo Production</title>
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" type="image/jpeg" href="img/eloprod.jpg">
 </head>
 <body>
 
@@ -21,16 +22,14 @@
             <p style="margin-bottom: 20px;">
                 <strong>ELO PRODUCTION</strong><br>
                 Entrepreneur Individuel<br>
-                Siège social : [Ton Adresse], 73000 Chambéry<br>
-                Email : contact@eloprod.com<br>
+                Email : elosamapro@gmail.com<br>
                 SIRET : [Ton Numéro SIRET]
             </p>
 
             <h3 style="color: #db2777; margin-bottom: 15px;">2. Hébergement</h3>
             <p style="margin-bottom: 20px;">
                 Le site est hébergé par :<br>
-                [Nom de l'hébergeur, ex: OVH, Hostinger]<br>
-                Adresse de l'hébergeur
+                AlwaysData<br>
             </p>
 
             <h3 style="color: #db2777; margin-bottom: 15px;">3. Propriété Intellectuelle</h3>

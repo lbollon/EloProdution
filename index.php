@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Elo Production - Vidéaste & Monteur</title>
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" type="image/jpeg" href="img/eloprod.jpg">
 </head>
 <body>
 
@@ -19,13 +20,22 @@
         </div>
 
         <div class="top-split-section fade-in-up">
-            <section class="intro-box">
+            <section class="intro-box bio-section">
                 <div class="content-bar">
-                    <h2>Présentation</h2>
+                    <h2>À propos de moi</h2>
                 </div>
-                <p class="big-intro">Basé à Chambéry, je transforme vos rushes en or. Pas de bla-bla, que du résultat.</p>
-                <p>Spécialisé dans le montage dynamique et la captation S-Log3 pour les réseaux sociaux.</p>
-                <a href="catalog.php" class="btn">Voir mes offres</a>
+                
+                <div class="bio-container">
+                    <div class="bio-img-wrapper">
+                        <img src="./img/PDP-ELO.webp" alt="Léo - Elo Production" class="profile-pic">
+                    </div>
+                    
+                    <div class="bio-text">
+                        <p class="big-intro" style="margin-bottom: 10px;">Moi c'est Léo, 19 ans.</p>
+                        <p>Étudiant en BUT MMI à Chambéry le jour, créateur d'images la nuit. Je mixe ma technique universitaire et ma passion du terrain pour délivrer des vidéos qui impactent vraiment.</p>
+                        <a href="catalog.php" class="btn" style="margin-top: 20px;">Voir mes offres</a>
+                    </div>
+                </div>
             </section>
 
             <section class="narrative-box">
@@ -46,7 +56,7 @@
 
         <section id="showreel-section" class="showreel-section fade-in-up">
             <div class="content-bar" style="margin: 0 auto 30px auto; display: inline-block;">
-                <h2>Showreel 2026</h2>
+                <h2>Showreel 2026 [PROCHAINEMENT]</h2>
             </div>
             
             <div class="video-wrapper">
@@ -63,10 +73,10 @@
                     <h3>📸 Caméra</h3><p>Sony A6700 + Sigma 18-50mm</p>
                 </article>
                 <article class="gear-card">
-                    <h3>🎤 Audio & Stab</h3><p>DJI Mic 2 + Ronin</p>
+                    <h3>🎤 Audio & Stab</h3><p>Shure Moovemic One + Canon</p>
                 </article>
                 <article class="gear-card">
-                    <h3>💻 Post-Prod</h3><p>Premiere Pro + After Effects</p>
+                    <h3>💻 Post-Prod</h3><p>Suite Adobe</p>
                 </article>
             </div>
         </section>

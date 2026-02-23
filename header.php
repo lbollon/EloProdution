@@ -3,7 +3,7 @@
 <header role="banner">
     <div class="header-left">
         <a href="index.php" class="logo-link">
-            <img src="img/eloprod.jpg" alt="Elo Production">
+            <img src="./img/eloprod.jpg" alt="Elo Production">
         </a>
     </div>
 
